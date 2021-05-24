@@ -1,5 +1,5 @@
-g++ /codigo/registroLogin.cpp -o /cgi-bin/registroLogin.cgi
-chmod +x /cgi-bin/registroLogin.cgi
+g++ /codigo/loginRegistro.cpp -o /cgi-bin/loginRegistro.cgi
+chmod +x /cgi-bin/loginRegistro.cgi
 
 
 En /etc/httpd/conf/ esta la configuracion del Apache

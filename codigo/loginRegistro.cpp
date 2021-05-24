@@ -18,8 +18,7 @@ const string ENV[ 24 ] = {
 
 int main(int argc, char* argv[]) {
     ifstream htmlFile;
-    string filename = "Registro.html";
-    htmlFile.open("/var/www/html/Registro.html");
+    htmlFile.open("/var/www/Servicio-web-de-Seguridad/html/loginRegistro.html");
     if(!htmlFile.is_open()) {
         cout << "Content-Type:text/html\n";
         cout << "<TITLE>Failure</TITLE>\n";
@@ -43,8 +42,7 @@ int main(int argc, char* argv[]) {
          cout << "Environment variable does not exist.";
       }
       cout << "</td></tr>\n";
-   }
-	
+   }	
 }
 return 0;
 }
