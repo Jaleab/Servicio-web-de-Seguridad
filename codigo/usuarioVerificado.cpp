@@ -16,35 +16,33 @@ const string ENV[ 24 ] = {
    "SERVER_NAME","SERVER_PORT","SERVER_PROTOCOL",     
    "SERVER_SIGNATURE","SERVER_SOFTWARE" };   
 
+const int HTTP_COOKIE = 10;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[], char** envp) {
     ifstream htmlFile;
-    htmlFile.open("/var/www/Servicio-web-de-Seguridad/html/registrado.html");
+    htmlFile.open("/var/www/Servicio-web-de-Seguridad/html/usuarioVerificado.html");
     if(!htmlFile.is_open()) {
         cout << "Content-Type:text/html\n";
         cout << "<TITLE>Failure</TITLE>\n";
         cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
     }
     else {
-        cout << "Content-Type: text/html\n\n";
         cout << "Set-Cookie:estado = registrado;\r\n";
+        cout << "Content-Type: text/html\n\n";
         string line = "";
         while(getline(htmlFile, line)){
-        cout << line +"\n";
-    }
+            cout << line +"\n";
+        }
+    cout << "\n\n\n\n\n";
     htmlFile.close();
-    for ( int i = 0; i < 24; i++ ) {
-      cout << "<tr><td>" << ENV[ i ] << "</td><td>";
-      
-      // attempt to retrieve value of environment variable
-      char *value = getenv( ENV[ i ].c_str() );  
-      if ( value != 0 ) {
-         cout << value;                                 
-      } else {
-         cout << "Environment variable does not exist.";
-      }
-      cout << "</td></tr>\n";
-   }	
+    // Cookies esta en el indice 10 de envp
+    cout << envp[HTTP_COOKIE] << "<br>";
+    int i = 0;
+    // Recorrido en las variables de ambiente
+    for (char **env = envp; *env != 0; env++){
+        char *thisEnv = *env;
+        cout << i++ << " " << thisEnv << "<br>";
+     }	
 }
 return 0;
 }

@@ -23,6 +23,8 @@ int main(int argc, char* argv[]) {
         cout << "Content-Type:text/html\n";
         cout << "<TITLE>Failure</TITLE>\n";
         cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
+        cout << "Set-Cookie:UserID = XYZ;\r\n";
+        cout << "Set-Cookie:Password = XYZ123;\r\n";
     }
     else {
         cout << "Content-Type: text/html\n\n";
