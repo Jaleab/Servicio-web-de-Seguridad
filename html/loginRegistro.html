@@ -66,29 +66,31 @@
       </nav>
     </header>
     <div class="card card1" style="width: 20rem; margin-top: 20px; top: -62px">
-        <div class="card-body">
-            <div>
-                <div class="row" style="margin-top:115px; margin-bottom: 20px">
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="col-form-label" for="correoInput">Correo electronico</label>
-                            <input type="text" title="Correo electronico" class="form-control" placeholder="Correo electronico" id="correoInput" name="correoInput" required value="" maxlength="60">
+        <form action="http://172.24.131.152/cgi-bin/usuarioVerificado.cgi"  method="get">
+            <div class="card-body">
+                <div>
+                    <div class="row" style="margin-top:115px; margin-bottom: 20px">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="col-form-label" for="correoInput">Correo electronico</label>
+                                <input type="text" title="Correo electronico" class="form-control" placeholder="Correo electronico" id="correoInput" name="correoInput" required value="" maxlength="60">
+                            </div>
                         </div>
                     </div>
+                    <div class="row" style="margin-top:20px; margin-bottom: 30px">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="col-form-label" for="claveInput">Contraseña</label>
+                                <input type="text" title="Contraseña" class="form-control" placeholder="Contraseña" id="claveInput" required value="" name="claveInput maxlength="30">
+                            </div>
+                        </div>
+                    </div>  
                 </div>
-                <div class="row" style="margin-top:20px; margin-bottom: 30px">
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="col-form-label" for="claveInput">Contraseña</label>
-                            <input type="text" title="Contraseña" class="form-control" placeholder="Contraseña" id="claveInput" required value="" name="claveInput maxlength="30">
-                        </div>
-                    </div>
-                </div>  
+                <div style="text-align:center;">
+                    <input type="submit" class="btn btn-primary" style="width: 200px; margin-bottom:115px" value="Entrar"></input>
+                </div>
             </div>
-            <div style="text-align:center;">
-                <button action="172.24.131.152/cgi-bin/usuarioVerificado.cgi" method="get" type="button" class="btn btn-primary" style="width: 200px; margin-bottom:115px">Entrar</button>
-            </div>
-        </div>
+        </form>
     </div>     
     
     <div class="card card2" style="width: 20rem; margin-top: 20px;">
