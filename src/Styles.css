@@ -1,0 +1,14 @@
+.card1{
+    display: inline-block;
+    margin-left: 30%;
+}   
+.card2{
+    display: inline-block;
+    margin-left: 10%;
+}  
+header{
+    margin-bottom: 80px;
+}
+.card2 input{
+    height: 25px
+}
