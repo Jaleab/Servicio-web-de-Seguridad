@@ -1,9 +1,8 @@
 // g++ main.cpp -o output -L/usr/include/mariadb/mysql -lmariadbclient
 #include <iostream>
 // Verificar cual libreria tiene find /usr/ -name 'mysql.h'
-#include <mysql/mysql.h> // /usr/includes/mariadb/mysql.h  /usr/includes/mysql/mysql.h
+#include </usr/include/mysql/mysql.h> // /usr/includes/mariadb/mysql.h  /usr/includes/mysql/mysql.h
 #include <cstdlib>
-
 
 struct connection_details
 {
