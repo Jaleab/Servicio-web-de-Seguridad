@@ -1,7 +1,8 @@
-// g++ main.cpp -o output -L/usr/include/mariadb/mysql -lmariadbclient
+// g++ `mysql_config --cflags --libs` codigo/connector.cpp -o test
+// ./test
 #include <iostream>
 // Verificar cual libreria tiene find /usr/ -name 'mysql.h'
-#include </usr/include/mysql/mysql.h> // /usr/includes/mariadb/mysql.h  /usr/includes/mysql/mysql.h
+#include <mysql/mysql.h> // /usr/includes/mariadb/mysql.h  /usr/includes/mysql/mysql.h
 #include <cstdlib>
 
 struct connection_details
@@ -48,13 +49,14 @@ int main(int argc, char const *argv[])
     con = mysql_connection_setup(mysqlD);
 
     // get the results from executing commands
-    res = mysql_perform_query(con, "select * from tblUsers;");
+    res = mysql_perform_query(con, "select * from Usuario;");
 
     std::cout << ("Database Output:\n") << std::endl;
 
     while ((row = mysql_fetch_row(res)) != NULL){
         // the below row[] parametes may change depending on the size of the table and your objective
-        std::cout << row[0] << " | " << row[1] << " | " << row[2] << " | " << row[3] << " | " << row[4] << std::endl << std::endl;
+        //std::cout << row[0] << " | " << row[1] << " | " << row[2] << " | " << row[3] << " | " << row[4] << std::endl << std::endl;
+        std::cout << row[0] << " | " << row[1] << " | " << row[2] << " | " << row[3] << std::endl;
     }
 
     // clean up the database result
