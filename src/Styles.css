@@ -1,3 +1,13 @@
+
+:root{
+    --Azul_UCR: #005DA4;
+    --Amarillo2_UCR: #FFDD00;
+    --Verde4_UCR: #008641;
+    --Verde_UCR: #6DC067;
+}
+
+
+
 .card1{
     display: inline-block;
     margin-left: 30%;
@@ -8,7 +18,19 @@
 }  
 header{
     margin-bottom: 80px;
+    background-color: var(--Azul_UCR);
 }
 .card2 input{
     height: 25px
 }
+
+/* Footer */
+.footer {
+    padding: 10px;
+    text-align: center;
+    color: ghostwhite ;
+    background: var(--Azul_UCR);
+    position: fixed;
+    width: 100%;
+    bottom: 0%;
+  }
