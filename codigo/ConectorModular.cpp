@@ -16,6 +16,10 @@ using namespace std;
                 std::cout << "Connection Error: " << mysql_error(connection) << std::endl;
                 exit(1); 
             }
+	    else{
+		cout << "Conectado" << endl;
+
+           }
 
          return connection;
     }
@@ -34,10 +38,10 @@ using namespace std;
     MYSQL* ConectorModular::connection(){
         MYSQL *con;	// the connection
         struct connection_details mysqlD;
-        mysqlD.server = "localhost";  // where the mysql database is
+        mysqlD.server = "172.24.131.131";  // where the mysql database is
         mysqlD.user = "comunicador"; // user
         mysqlD.password = "abcd1234!@#"; // the password for the database
-        mysqlD.database = "prueba";     // the databse
+        mysqlD.database = "Seguridad";     // the databse
 
         // connect to the mysql database        
         return mysql_connection_setup(mysqlD);
