@@ -6,6 +6,10 @@
     --Verde_UCR: #6DC067;
 }
 
+header{
+    margin-bottom: 80px;
+    background-color: var(--Azul_UCR);
+}
 
 
 .card1{
@@ -16,14 +20,59 @@
     display: inline-block;
     margin-left: 10%;
 }  
-header{
-    margin-bottom: 80px;
-    background-color: var(--Azul_UCR);
-}
 .card2 input{
     height: 25px
 }
 
+.input-group-text{
+    background-color: var(--Verde_UCR);
+}
+
+.navbar-brand {
+    padding-top: .1125rem;
+    padding-bottom: .1125rem;
+    font-size: 2rem;
+}
+.navbar-nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.nav-link a{
+    color: black;
+}
+
+.btn-outline-success {
+	color: #292d2a;
+	background-color: #6DC067;
+	background-image: none;
+	border-color: #28a745;
+}
+
+.input-group.md-form.form-sm.form-2 input {
+    border: 1px solid #bdbdbd;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    position: relative;
+    width: 25rem;
+    max-width: 60%;
+    margin-left: 15rem;
+  }
+
+.input-group.md-form.form-sm.form-2 input.yellow-border {
+border: 1px solid var(--Amarillo2_UCR);
+}
+
+.btn {
+    margin-right: 2rem;
+}
 /* Footer */
 .footer {
     padding: 10px;

@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sitio ventas</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <script
       src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
@@ -19,7 +19,7 @@
     <link 
       rel="stylesheet"
       type="text/css"
-      href="file:///C:/Users/PUser/Desktop/UCR/Seguridad_de_Sistemas_Computacionales/Tarea_2/Servicio-web-de-Seguridad/src/styles.css"/>
+      href="https://gitcdn.link/repo/Jaleab/Servicio-web-de-Seguridad/main/src/Styles.css"/>
   </head>
 
   <body>
@@ -40,50 +40,31 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#"
-                >Home <span class="sr-only">(current)</span></a
-              >
+            <li class="nav-item">
+              <a class="nav-link" href="#">Página principal</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
+              <a class="nav-link" href="#">Contactenos</a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-              Search
-            </button>
-          </form>
+         <!--  <form class="form-search">
+            <div class="input-group">
+              <input class="form-control form-text" maxlength="128" placeholder="Buscar" size="15" type="text" />
+              <span class="input-group-btn"><button class="btn btn-primary"><i class="fa fa-search fa-lg">&nbsp;</i></button></span>
+            </div>
+          </form> -->
+          <div class="input-group md-form form-sm form-2 pl-0">
+            <input class="form-control my-0 py-1 yellow-border" type="text" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+              <span class="input-group-text amber lighten-1" id="basic-text1"><i class="fa fa-search text-grey"
+                  aria-hidden="true"></i></span>
+            </div>
+          </div>
           <div>
-            <button class="btn btn-outline-success my-2 my-sm-0">btn<i class="fas fa-shopping-cart"></i></button>
+            <button class="btn btn-outline-success my-2 my-sm-0">Cerrar cesión</button>
+          </div>
+          <div>
+            <button class="btn btn-outline-success my-2 my-sm-0"><i class="fa fa-shopping-cart fa-2x"></i></button>
           </div>
         </div>
       </nav>
