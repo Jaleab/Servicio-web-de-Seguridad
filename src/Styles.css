@@ -11,6 +11,12 @@ header{
     background-color: var(--Azul_UCR);
 }
 
+.card{
+    width: 50rem;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 10px;
+}
 
 .card1{
     display: inline-block;
@@ -43,10 +49,6 @@ header{
     padding-left: 0;
     margin-bottom: 0;
     list-style: none;
-}
-
-.nav-link a{
-    color: black;
 }
 
 .btn-outline-success {
