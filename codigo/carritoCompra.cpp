@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
         htmlFile.close();
         
         // Insertar contenido en el body
-        htmlFile.open("../html/formularioArticulo.html");
+        htmlFile.open("../html/carritoCompra.html");
         if(!htmlFile.is_open()) {
             cout << "<TITLE>Failure</TITLE>\n";
             cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
