@@ -13,8 +13,7 @@ int main(int argc, char const *argv[])
     MYSQL_ROW row;	// the results rows (array)
 
     con = conectorModularPtr->connection();
-
-    res = conectorModularPtr->query(con, "SELECT * FROM Usuario;");
+    res = conectorModularPtr->query(con, "SELECT COUNT(*) FROM Usuario WHERE usuario = 'Jaleab' AND clave = '1234678';");
 
     std::cout << ("Database Output:\n") << std::endl;
 

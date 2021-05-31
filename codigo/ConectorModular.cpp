@@ -16,11 +16,6 @@ using namespace std;
                 std::cout << "Connection Error: " << mysql_error(connection) << std::endl;
                 exit(1); 
             }
-	    else{
-		cout << "Conectado" << endl;
-
-           }
-
          return connection;
     }
 
@@ -28,7 +23,7 @@ using namespace std;
     MYSQL_RES* mysql_perform_query(MYSQL *connection, const char *sql_query){
         //send query to db
         if(mysql_query(connection, sql_query)){
-            std::cout << "MySQL Query Error: " << mysql_error(connection) << std::endl;
+            //std::cout << "MySQL Query Error: " << mysql_error(connection) << std::endl;
             exit(1);
         }
 

@@ -15,7 +15,6 @@ int main(int argc, char* argv[], char** envp) {
     }
     else {
         string correo = getenv("QUERY_STRING");
-        //cout << correo << "<br>";
         if(correo.find("ucr.ac.cr") != string::npos){
             cout << "Set-Cookie:estado = registrado;\r\n";
         }
@@ -28,6 +27,15 @@ int main(int argc, char* argv[], char** envp) {
             cout << line +"\n";
         }
         htmlFile.close();
+	cout << getenv("QUERY_STRING") << "<br><br><br>";
+	string query = correo;
+	
+	string temp = query.substr(0,query.find("&claveInput",0));
+	cout << temp << "<br>";
+	string correoElectronico = temp.substr(temp.find("correoInput=")+12);
+	cout << "Prueba: " << correoElectronico << "<br";
+
+
         cout << getenv("HTTP_COOKIE") << "<br>";
         string hilera = getenv("HTTP_COOKIE");
         if(hilera.find("estado=registrado") != string::npos){
