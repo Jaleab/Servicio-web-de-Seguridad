@@ -1,14 +1,14 @@
 <html>
 <body>
     <div class="card card1" style="width: 20rem; margin-top: 20px; top: -62px">
-        <form action="usuarioVerificado.cgi"  method="get">
+        <form action="login.cgi"  method="get">
             <div class="card-body">
                 <div>
                     <div class="row" style="margin-top:115px; margin-bottom: 20px">
                         <div class="col">
                             <div class="form-group">
                                 <label class="col-form-label" for="correoInput">Correo electronico</label>
-                                <input type="email" title="Correo electronico" class="form-control" placeholder="Correo electronico" id="correoInput" name="correoInput" required value="" maxlength="60">
+                                <input type="email" title="Correo electronico" class="form-control" placeholder="Correo electronico" id="correoInput" name="correoInput" required value="" maxlength="30" title="Formato: nombre@dominio.com por ejemplo">
                             </div>
                         </div>
                     </div>
@@ -16,7 +16,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label class="col-form-label" for="claveInput">Contraseña</label>
-                                <input type="password" title="Contraseña" class="form-control" placeholder="Contraseña" id="claveInput" required value="" name="claveInput minlength="8" maxlength="30">
+                                <input type="password" class="form-control" placeholder="Contraseña" id="claveInput" required value="" name="claveInput" minlength="8" maxlength="20" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" title="Debe contener al menos 1 Mayuscula, 1 numero, 1 simbolo (!@#$%^&*_=+-) y un largo entre 8 a 20 caracteres.">
                             </div>
                         </div>
                     </div>  
@@ -26,74 +26,76 @@
                 </div>
             </div>
         </form>
-    </div>     
+    </div>
     
     <div class="card card2" style="width: 20rem; margin-top: 20px;">
-        <div class="card-body">
-            <div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="col-form-label" for="nombreInput">Nombre</label>
-                            <input type="text" title="Nombre" class="form-control" placeholder="Nombre" id="nombreInput" required value="" maxlength="60">
+        <form action="registro.cgi"  method="get">
+            <div class="card-body">
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="col-form-label" for="nombreInput">Nombre</label>
+                                <input type="text" title="Unicamente letras de la a-z" class="form-control" placeholder="Nombre" id="nombreInput" required value="" maxlength="20" pattern="^[a-z]{1,20}$">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="col-form-label" for="apellido1Input">Primer apellido</label>
-                            <input type="text" title="Primer apellido" class="form-control" placeholder="Primer apellido" id="apellido1Input" required value="" maxlength="60">
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="col-form-label" for="apellido1Input">Primer apellido</label>
+                                <input type="text" title="Unicamente letras de la a-z" class="form-control" placeholder="Primer apellido" id="apellido1Input" required value="" maxlength="20" pattern="^[a-z]{1,20}$">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="col-form-label" for="apellido2Input">Segundo apellido</label>
-                            <input type="text" title="Segundo apellido" class="form-control" placeholder="Segundo apellido" id="apellido2Input" required value="" maxlength="60">
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="col-form-label" for="apellido2Input">Segundo apellido</label>
+                                <input type="text" title="Unicamente letras de la a-z." class="form-control" placeholder="Segundo apellido" id="apellido2Input" required value="" maxlength="20" pattern="^[a-z]{1,20}$">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="col-form-label" for="usuarioInput">Usuario</label>
-                            <input type="text" title="Usuariop" class="form-control" placeholder="Usuario" id="usuarioInput" required value="" maxlength="60">
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="col-form-label" for="usuarioInput">Usuario</label>
+                                <input type="text" title="Solo caracteres de la a-z. El usuario debe ser de maximo 20 caracteres." class="form-control" placeholder="Usuario" id="usuarioInput" required value="" maxlength="20" pattern="^[a-z]{1,20}$">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="col-form-label" for="telefonoInput">Telefono</label>
-                            <input type="tel" title="Correo electronico" class="form-control" placeholder="Telefono" id="telefonoInput" required value="" maxlength="60">
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="col-form-label" for="telefonoInput">Telefono</label>
+                                <input type="tel" title="Telefono con el formato 43215678" class="form-control" placeholder="Telefono" id="telefonoInput" required value="" maxlength="8" pattern="\d{8}">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div>
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label class="col-form-label" for="contrasenaInput">Contraseña</label>
-                            <input type="text" title="Contraseña" class="form-control" placeholder="Contraseña" id="contrasenaInput" required value="" maxlength="60">
+                            <label class="col-form-label" for="claveInput">Contraseña</label>
+                            <input type="password" class="form-control" placeholder="Contraseña" id="claveInput" required value="" name="claveInput" minlength="8" maxlength="20" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" title="Debe contener al menos 1 Mayuscula, 1 numero, 1 simbolo (!@#$%^&*_=+-) y un largo entre 8 a 20 caracteres.">
                         </div>
                     </div>
+                </div> 
+                <div>
+                <div style="text-align:center;">
+                    <input type="submit" class="btn btn-primary" style="width: 200px; height: 35px;" value="Registrarse"></input>
                 </div>
             </div>
-            <div style="text-align:center;">
-                <button type="button" class="btn btn-primary" style="width: 200px;">Registrarse</button>
-            </div>
-        </div>
-    </div>
+        </form>
+    </div> 
 </body>
 </html>
+
