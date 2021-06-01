@@ -24,8 +24,14 @@ int main(int argc, char const *argv[]){
     apellido2 = apellido2.substr(apellido2.find("apellido2Input=")+15);
 
     // Usuario
-    string usuario = queryString.substr(0, queryString.find("&telefonoInput",0));
+    string usuario = queryString.substr(0, queryString.find("&correoInput",0));
     usuario = usuario.substr(usuario.find("usuarioInput=")+13);
+
+    // Correo electronico
+    string correo = queryString.substr(0,queryString.find("&telefonoInput",0));
+    correo = correo.substr(correo.find("correoInput=")+12);
+    correo[correo.find("%40")] = '@';
+    correo = correo.erase(correo.find("@40")+1,2);
 
     // Telefono
     string telefono = queryString.substr(0, queryString.find("&claveInput",0));
@@ -39,18 +45,19 @@ int main(int argc, char const *argv[]){
     MYSQL_RES *res;	// the results
     MYSQL_ROW row;	// the results rows (array)
 
-// https://172.24.131.152/cgi-bin/registro.cgi?nombreInput=Ricardo&apellido1Input=Villalon&apellido2Input=Fonseca&usuarioInput=Villa&telefonoInput=77777777&claveInput=Hacker1234
+// https://172.24.131.152/cgi-bin/registro.cgi?nombreInput=Ricardo&apellido1Input=Villalon&apellido2Input=Fonseca&usuarioInput=Villa&correoInput=villa%40seguridad.com&telefonoInput=77777777&claveInput=Hacker1234
 /* INSERT INTO Usuario(correo, nombre, appelido1, apellido2, telefono, usuario, contraseña) VALUES('javier.abarca@ucr.ac.cr','Javier','Abarca','Jimenez','12345678','Jaleab','1234678');
 Verificar campos de la base de datos Appelido1******
 */
 
     con = conectorModularPtr->connection();
-    string query = "INSERT INTO Usuario(correo,nombre,appellido1,apellido2,telefono,usuario,clave) VALUES ('" + nombre + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + telefono + "','" + usuario + "','" + clave + "');";
-/*    res = conectorModularPtr->query(con, "SELECT COUNT(*) FROM Usuario WHERE usuario = 'Jaleab' AND clave = '1234678';");
+    string query = "INSERT INTO Usuario(correo,nombre,appelido1,apellido2,telefono,usuario,clave) VALUES ('" + correo + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + telefono + "','" + usuario + "','" + clave + "');";
+    res = conectorModularPtr->query(con, query.c_str());
     // clean up the database result
     mysql_free_result(res);    
     // close database connection
-    mysql_close(con);*/
+    mysql_close(con);
+
 
     ifstream htmlFile;
     string line = "";
@@ -87,6 +94,7 @@ Verificar campos de la base de datos Appelido1******
         cout << apellido1 << "<br>";
 	cout << apellido2 << "<br>";
 	cout << usuario << "<br>";
+	cout << correo << "<br>";
 	cout << telefono << "<br>";
         cout << clave << "<br>";
 	cout << query << "<br>";
