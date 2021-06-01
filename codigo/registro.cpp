@@ -11,12 +11,28 @@ using namespace std;
 int main(int argc, char const *argv[]){
     string queryString = getenv("QUERY_STRING");
 	
-	// Usuario
-    string usuario = queryString.substr(0,queryString.find("&apellido1Input",0));
-    usuario = usuario.substr(usuario.find("correoInput=")+13);
+    // Nombre
+    string nombre = queryString.substr(0,queryString.find("&apellido1Input",0));
+    nombre = nombre.substr(nombre.find("nombreInput=")+12);
+
+    // Apellido1
+    string apellido1 = queryString.substr(0,queryString.find("&apellido2Input",0));
+    apellido1 = apellido1.substr(apellido1.find("apellido1Input=")+15);
+
+    // Apellido2
+    string apellido2 = queryString.substr(0,queryString.find("&usuarioInput",0));
+    apellido2 = apellido2.substr(apellido2.find("apellido2Input=")+15);
+
+    // Usuario
+    string usuario = queryString.substr(0, queryString.find("&telefonoInput",0));
+    usuario = usuario.substr(usuario.find("usuarioInput=")+13);
+
+    // Telefono
+    string telefono = queryString.substr(0, queryString.find("&claveInput",0));
+    telefono = telefono.substr(telefono.find("telefonoInput=")+14);
 
     // Clave
-    string clave = queryString.substr(queryString.find("nombreInput=")+11);
+    string clave = queryString.substr(queryString.find("claveInput=")+11);
 
     ConectorModular* conectorModularPtr;
     MYSQL* con;
@@ -27,14 +43,15 @@ int main(int argc, char const *argv[]){
 /* INSERT INTO Usuario(correo, nombre, appelido1, apellido2, telefono, usuario, contraseña) VALUES('javier.abarca@ucr.ac.cr','Javier','Abarca','Jimenez','12345678','Jaleab','1234678');
 Verificar campos de la base de datos Appelido1******
 */
-/*
+
     con = conectorModularPtr->connection();
-    res = conectorModularPtr->query(con, "SELECT COUNT(*) FROM Usuario WHERE usuario = 'Jaleab' AND clave = '1234678';");
+    string query = "INSERT INTO Usuario(correo,nombre,appellido1,apellido2,telefono,usuario,clave) VALUES ('" + nombre + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + telefono + "','" + usuario + "','" + clave + "');";
+/*    res = conectorModularPtr->query(con, "SELECT COUNT(*) FROM Usuario WHERE usuario = 'Jaleab' AND clave = '1234678';");
     // clean up the database result
     mysql_free_result(res);    
     // close database connection
-    mysql_close(con);
-*/
+    mysql_close(con);*/
+
     ifstream htmlFile;
     string line = "";
     // Insertar header en el body
@@ -66,8 +83,15 @@ Verificar campos de la base de datos Appelido1******
         }
         htmlFile.close();
 
-        cout << usuario;
+        cout << nombre << "<br>";
+        cout << apellido1 << "<br>";
+	cout << apellido2 << "<br>";
+	cout << usuario << "<br>";
+	cout << telefono << "<br>";
+        cout << clave << "<br>";
+	cout << query << "<br>";
     }
     return 0;
 }
+
 
