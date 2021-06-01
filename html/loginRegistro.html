@@ -1,4 +1,10 @@
 <html>
+<style>
+.card{
+	margin-right: unset;
+}
+</style>
+
 <body>
     <div class="card card1" style="width: 20rem; margin-top: 20px; top: -62px">
         <form action="login.cgi"  method="get">
@@ -28,7 +34,7 @@
         </form>
     </div>
     
-    <div class="card card2" style="width: 20rem; margin-top: 20px;">
+    <div class="fix card card2" style="width: 20rem; margin-top: 20px;">
         <form action="registro.cgi"  method="get">
             <div class="card-body">
                 <div>
@@ -85,11 +91,10 @@
                     <div class="col">
                         <div class="form-group">
                             <label class="col-form-label" for="claveInput">Contraseña</label>
-                            <input type="password" class="form-control" placeholder="Contraseña" id="claveInput" required value="" name="claveInput" minlength="8" maxlength="20" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" title="Debe contener al menos 1 Mayuscula, 1 numero, 1 simbolo (!@#$%^&*_=+-) y un largo entre 8 a 20 caracteres.">
+                            <input type="password" class="form-control" placeholder="Contraseña" id="claveInput2" required value="" name="claveInput" minlength="8" maxlength="20" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" title="Debe contener al menos 1 Mayuscula, 1 numero, 1 simbolo (!@#$%^&*_=+-) y un largo entre 8 a 20 caracteres.">
                         </div>
                     </div>
                 </div> 
-                <div>
                 <div style="text-align:center;">
                     <input type="submit" class="btn btn-primary" style="width: 200px; height: 35px;" value="Registrarse"></input>
                 </div>
