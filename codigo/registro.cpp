@@ -51,8 +51,17 @@ Verificar campos de la base de datos Appelido1******
 */
 
     con = conectorModularPtr->connection();
-    string query = "INSERT INTO Usuario(correo,nombre,appelido1,apellido2,telefono,usuario,clave) VALUES ('" + correo + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + telefono + "','" + usuario + "','" + clave + "');";
+
+    // Verificar si el usuario ya esta registrado con correo y clave
+    string query = "SELECT count(*) FROM Usuario WHERE correo ='"+ correo + "' AND clave = '" + clave + "';";
     res = conectorModularPtr->query(con, query.c_str());
+    row = mysql_fetch_row(res);
+    char estaRegistrado = *row[0];
+
+    if(estaRegistrado == '0'){
+        string query = "INSERT INTO Usuario(correo,nombre,appelido1,apellido2,telefono,usuario,clave) VALUES ('" + correo + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + telefono + "','" + usuario + "','" + clave + "');";
+        res = conectorModularPtr->query(con, query.c_str());
+    }
     // clean up the database result
     mysql_free_result(res);    
     // close database connection
@@ -90,16 +99,20 @@ Verificar campos de la base de datos Appelido1******
         }
         htmlFile.close();
 
-        cout << nombre << "<br>";
+	if(estaRegistrado == '1'){
+		cout << "El usuario ya esta registrado." << "<br>";
+	}
+	else{
+		cout << "El usuario fue registrado exitosamente." << "<br>";
+	}
+        /*cout << nombre << "<br>";
         cout << apellido1 << "<br>";
-	cout << apellido2 << "<br>";
-	cout << usuario << "<br>";
-	cout << correo << "<br>";
-	cout << telefono << "<br>";
+        cout << apellido2 << "<br>";
+        cout << usuario << "<br>";
+        cout << correo << "<br>";
+        cout << telefono << "<br>";
         cout << clave << "<br>";
-	cout << query << "<br>";
+	cout << query << "<br>";*/
     }
     return 0;
 }
-
-
