@@ -41,6 +41,7 @@ int main(int argc, char* argv[]) {
             if(!htmlFile.is_open()) {
                 cout << "<TITLE>Failure</TITLE>\n";
                 cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
+		cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
             }
             else {
                 line = "";

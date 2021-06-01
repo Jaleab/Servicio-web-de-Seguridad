@@ -78,8 +78,11 @@ Verificar campos de la base de datos Appelido1******
         cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
     }
     else {
-        cout << "Content-Type: text/html\n\n";
-        cout << "<TITLE>Login</TITLE>\n";
+	if(estaRegistrado == '1'){
+		cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
+	}
+	cout << "Content-Type: text/html\n\n";
+        cout << "<TITLE>Registro</TITLE>\n";
         while(getline(htmlFile, line)){
             if(line.find("Login") == string::npos){
                 cout << line << "\n";
@@ -106,6 +109,7 @@ Verificar campos de la base de datos Appelido1******
 		cout << "El usuario fue registrado exitosamente." << "<br>";
 	}
         /*cout << nombre << "<br>";
+	cout << estaRegistrado;
         cout << apellido1 << "<br>";
         cout << apellido2 << "<br>";
         cout << usuario << "<br>";

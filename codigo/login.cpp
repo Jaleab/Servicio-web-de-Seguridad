@@ -65,7 +65,7 @@ int main(int argc, char* argv[], char** envp) {
             }
             else{
                 if(estaRegistrado == '1'){
-                    string botonCerrarSesion = "<a href=\"https://172.24.131.152/cgi-bin/cerrarSesion.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesión</a>";
+                    string botonCerrarSesion = "<a href=\"https://172.24.131.152/cgi-bin/loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesión</a>";
                     cout << botonCerrarSesion << "\n";
                 }
                 else{
@@ -75,7 +75,8 @@ int main(int argc, char* argv[], char** envp) {
             }
         }
         htmlFile.close();
-
+	cout << "Ingreso correctamente al sistema." << "<br>";
+/*
         // Correo electronico
         string correo = queryString.substr(0,queryString.find("&claveInput",0));
         correo = correo.substr(correo.find("correoInput=")+12);
@@ -93,6 +94,7 @@ int main(int argc, char* argv[], char** envp) {
         else{
             cout << "Usuario n oesta registrado" << "<br>";
         }
+*/
 
 
         // Insertar footer en el body
