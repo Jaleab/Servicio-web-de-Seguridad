@@ -18,7 +18,7 @@ int main(int argc, char* argv[], char** envp) {
     correo = correo.erase(correo.find("@40")+1,2);
 
     // Clave
-    string clave = queryString.substr(queryString.find("%3D=")+4);
+    string clave = queryString.substr(queryString.find("claveInput=")+11);
 
     ConectorModular* conectorModularPtr;
     MYSQL* con;
