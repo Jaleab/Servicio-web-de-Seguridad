@@ -46,27 +46,8 @@ int main(int argc, char* argv[], char** envp) {
    cout << "<html>\n";
    cout << "<body>\n";
 
-        // Insertar contenido en el body
-        htmlFile.open("../html/carritoCompra.html");
-        if(!htmlFile.is_open()) {
-            cout << "<TITLE>Failure</TITLE>\n";
-            cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
-        }
-        else {
-            line = "";
-            while(getline(htmlFile, line)){
-                cout << line +"\n";
-            }
 
             char *hilera = getenv("HTTP_COOKIE");
-            //cout << hilera;
-
-            /*string Str = "";
-            Str =+ hilera;*/
-
-            //string str(hilera);
-
-            //cout << hilera;
 
             
             string s;
@@ -74,19 +55,6 @@ int main(int argc, char* argv[], char** envp) {
             ss << hilera;
             s = ss.str();
 
-            //cout << s;
-
-
-            /*
-             strncpy (pch,"123456789",6);
-              cout << pch << '\n';*/
-
-
-
-            /*string str="We think in generalities, but we live in details.";
-            size_t pos = str.find("live");
-            string str2 = str.substr (pos,5);
-            cout << str2;*/
 
             size_t pos = s.find("articulo");     
 
@@ -95,8 +63,6 @@ int main(int argc, char* argv[], char** envp) {
             size_t posfin = str3.find(";");    
 
             string str4 = str3.substr (0,posfin); 
-
-            //cout << str4 << '\n';
 
 
             
@@ -109,10 +75,9 @@ int main(int argc, char* argv[], char** envp) {
               result.push_back(substr);
            }
 
-            /*for(int i = 0; i<result.size(); i++) {    //print all splitted strings
-                cout << result.at(i) << endl;
-            }
-*/
+
+            cout << "<div class=\"card card3\" style=\"width: 50rem; margin-top: 30px; margin-left:20%\">\n";
+            cout << "<div class=\"card-body\">\n";
 
             cout << "<table class=\"table\">\n";
             cout << "<thead>";
@@ -126,46 +91,56 @@ int main(int argc, char* argv[], char** envp) {
             }
             cout << "</tbody>";
             cout << "</table>\n";
-
-            
         
             cout << "</body>\n";
             cout << "</html>\n";
 
+            cout << "<div>\n";
+            cout << "<div class=\"row\">\n";
+            cout << "<div class=\"col\">\n";
 
-            
-              
+            cout << "<div class=\"form-group\" style=\"text-align:center;\">\n";
+            cout << "<label class=\"col-form-label\" for=\"TotalInput\">Total:</label>\n";
+            cout << "<input title=\"Total\" class=\"form-control\" placeholder=\"0\" id=\"TotalInput\" disabled></textarea>\n";
+            cout << "</div>\n";
+            cout << "</div>\n";
+            cout << "</div>\n";
+            cout << "</div>\n";
 
-            //string str4 = str3.substr(0,posfin); 
+            cout << "<div style=\"text-align:center;\">\n";
+            cout << "<button id=\"btn_Regresar\" type=\"button\" class=\"btn btn-primary\" style=\"width: 200px;\">Regresar</button>\n";
+            cout << "<button id=\"btn_FinalizarCompra\" type=\"button\" data-toggle=\"modal\" data-target=\"#myModal\" class=\"btn btn-primary\" style=\"width: 200px;\">Finalizar compra</button>\n";
+            cout << "</div>\n";
 
-            //cout << str4 << '\n';
+            //<!-- Modal -->
+            cout << "<div class=\"modal fade\" id=\"myModal\" role=\"dialog\">";
+            cout << "<div class=\"modal-dialog\">";
+    
+            //<!-- Modal content-->
+            cout << "<div class=\"modal-content\">";
+            cout << "<div class=\"modal-header\">";
+            cout << "<button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>";
+            cout << "<h4 class=\"modal-title\">Aviso de compra</h4>";
+            cout << "</div>";
+            cout << "<div class=\"modal-body\">";
+            cout << "<p>Compra realizada exitosamente.</p>";
+            cout << "</div>";
+            cout << "<div class=\"modal-footer\">";
+            cout << "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Cerrar</button>";
+            cout << "</div>";
+            cout << "</div>";
+            cout << "</div>";
+            cout << "</div>";
+            //<!-- Modal Fin-->
+
+            cout << "</div>\n";
+            cout << "</div>\n";
 
 
-            /*char* sublis = substr(hilera,9, 15);
-            char* chars_array = strtok(sublis, ",");
 
-
-            cout << "<table class=\"table\">\n";
-            cout << "<thead>";
-            cout << "<th>Articulos</th>";
-            cout << "</thead>";
-            cout << "<tbody>";
-            while (chars_array)
-            {
-                cout << "<tr>";
-                cout << "<td>" << chars_array << "</td>";
-                cout << "</tr>";
-                chars_array = strtok(NULL, ",");
-            }
-            cout << "</tbody>";
-            cout << "</table>\n";
         
-            cout << "</body>\n";
-            cout << "</html>\n";*/
-        }
 
-
-               // Insertar footer en el body
+            // Insertar footer en el body
             htmlFile.open("../html/footerInsert.html");
             if(!htmlFile.is_open()) {
                 cout << "<TITLE>Failure</TITLE>\n";
