@@ -79,7 +79,6 @@ int main(int argc, char* argv[], char** envp) {
         cout << "Correo: " << correo << "<br>";
 
         // Clave
-        string clave = queryString.substr(queryString.find("%3D=")+4);
             cout << "Clave: " << clave << "<br>";
 
         cout << query << "<br>";
