@@ -29,7 +29,12 @@ int main(int argc, char* argv[], char** envp) {
     string query = "SELECT count(*) FROM Usuario WHERE correo ='"+ correo + "' AND clave = '" + clave + "';";
     res = conectorModularPtr->query(con, query.c_str());
     row = mysql_fetch_row(res);
-	char estaRegistrado = *row[0];
+    char estaRegistrado = *row[0];
+    // clean up the database result
+    mysql_free_result(res);
+    
+    // close database connection
+    mysql_close(con);
 
     // Cookies estado usuario
     if(estaRegistrado == '1'){
