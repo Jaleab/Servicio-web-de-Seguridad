@@ -45,28 +45,24 @@ int main(int argc, char const *argv[]){
     MYSQL_RES *res;	// the results
     MYSQL_ROW row;	// the results rows (array)
 
-// https://172.24.131.152/cgi-bin/registro.cgi?nombreInput=Ricardo&apellido1Input=Villalon&apellido2Input=Fonseca&usuarioInput=Villa&correoInput=villa%40seguridad.com&telefonoInput=77777777&claveInput=Hacker1234
-/* INSERT INTO Usuario(correo, nombre, appelido1, apellido2, telefono, usuario, contraseña) VALUES('javier.abarca@ucr.ac.cr','Javier','Abarca','Jimenez','12345678','Jaleab','1234678');
-Verificar campos de la base de datos Appelido1******
-*/
-
     con = conectorModularPtr->connection();
 
     // Verificar si el usuario ya esta registrado con correo y clave
-    string query = "SELECT count(*) FROM Usuario WHERE correo ='"+ correo + "' AND clave = '" + clave + "';";
+    string query = "SELECT count(*) FROM Usuario WHERE correo ='"+ correo + "' AND usuario = '" + usuario + "';";
     res = conectorModularPtr->query(con, query.c_str());
     row = mysql_fetch_row(res);
     char estaRegistrado = *row[0];
 
     if(estaRegistrado == '0'){
-        string query = "INSERT INTO Usuario(correo,nombre,appelido1,apellido2,telefono,usuario,clave) VALUES ('" + correo + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + telefono + "','" + usuario + "','" + clave + "');";
-        res = conectorModularPtr->query(con, query.c_str());
+	// clean up the database result
+    mysql_free_result(res);
+        query = "INSERT INTO Usuario(correo,nombre,appelido1,apellido2,telefono,usuario,clave) VALUES ('" + correo + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + telefono + "','" + usuario + "','" + clave + "');";
+	res = conectorModularPtr->query(con, query.c_str());
     }
     // clean up the database result
     mysql_free_result(res);    
     // close database connection
     mysql_close(con);
-
 
     ifstream htmlFile;
     string line = "";
@@ -78,9 +74,12 @@ Verificar campos de la base de datos Appelido1******
         cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
     }
     else {
-	if(estaRegistrado == '1'){
-		cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
-	}
+	if(estaRegistrado != '0'){
+                cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
+        }
+        else {
+                cout << "Set-Cookie:estadoUsuario = Registrado;\r\n";
+        }
 	cout << "Content-Type: text/html\n\n";
         cout << "<TITLE>Registro</TITLE>\n";
         while(getline(htmlFile, line)){
@@ -89,13 +88,12 @@ Verificar campos de la base de datos Appelido1******
             }
             else{
 		string hilera = getenv("HTTP_COOKIE");
-		char estaRegistrado = hilera.find("estadoUsuario=Registrado") != string::npos?'1':'0';
-                if(estaRegistrado == '1'){
-                    string botonCerrarSesion = "<a href=\"https://172.24.131.152/cgi-bin/cerrarSesion.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesión</a>";
+                if(estaRegistrado != '0'){
+                    string botonCerrarSesion = "<a href=\"https://172.24.131.152/cgi-bin/loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
                     cout << botonCerrarSesion << "\n";
                 }
                 else{
-                    string botonLoginRegistro = "<a href=\"https://172.24.131.152/cgi-bin/loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
+                    string botonLoginRegistro = "<a href=\"https://172.24.131.152/cgi-bin/loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesion</a>";
                     cout << botonLoginRegistro << "\n";
                 }
             }
@@ -108,15 +106,6 @@ Verificar campos de la base de datos Appelido1******
 	else{
 		cout << "El usuario fue registrado exitosamente." << "<br>";
 	}
-        /*cout << nombre << "<br>";
-	cout << estaRegistrado;
-        cout << apellido1 << "<br>";
-        cout << apellido2 << "<br>";
-        cout << usuario << "<br>";
-        cout << correo << "<br>";
-        cout << telefono << "<br>";
-        cout << clave << "<br>";
-	cout << query << "<br>";*/
     }
     return 0;
 }

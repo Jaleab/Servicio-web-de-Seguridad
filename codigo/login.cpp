@@ -37,13 +37,11 @@ int main(int argc, char* argv[], char** envp) {
     mysql_close(con);
 
     // Cookies estado usuario
-    if(estaRegistrado == '1'){
-        cout << "Set-Cookie:estadoUsuario = Registrado;\r\n";
+    if(estaRegistrado == '0'){
+        cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
     }
     else{
-        if(estaRegistrado == '0'){
-            cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
-        }
+            cout << "Set-Cookie:estadoUsuario = Registrado;\r\n";
     }
 
 
@@ -75,27 +73,12 @@ int main(int argc, char* argv[], char** envp) {
             }
         }
         htmlFile.close();
-	cout << "Ingreso correctamente al sistema." << "<br>";
-/*
-        // Correo electronico
-        string correo = queryString.substr(0,queryString.find("&claveInput",0));
-        correo = correo.substr(correo.find("correoInput=")+12);
-        correo[correo.find("%40")] = '@';
-        correo = correo.erase(correo.find("@40")+1,2);
-        cout << "Correo: " << correo << "<br>";
-
-        // Clave
-            cout << "Clave: " << clave << "<br>";
-
-        cout << query << "<br>";
-        if(row && estaRegistrado == '1'){
-            cout << "Usuario registrado" << "<br>";
-        }
-        else{
-            cout << "Usuario n oesta registrado" << "<br>";
-        }
-*/
-
+	if(estaRegistrado == '0'){
+		cout << "Ingreso credenciales incorrectos" << "<br>";
+	}
+	else{
+		cout << "Ingreso correctamente al sistema." << "<br>";
+	}
 
         // Insertar footer en el body
         htmlFile.open("../html/footerInsert.html");
