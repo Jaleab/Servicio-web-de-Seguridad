@@ -1,4 +1,4 @@
-// g++ `mysql_config --cflags --libs` registro.cpp ConectorModular.cpp -o ../cgi-bin/registro.cgi
+// g++ `mysql_config --cflags --libs` registro.cpp ConectorModular.cpp Checker.cpp -o ../cgi-bin/registro.cgi -std=c++11
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -6,39 +6,51 @@
 #include <string>
 #include <algorithm>
 #include "ConectorModular.h"
+#include "Checker.h"
 using namespace std;
 
 int main(int argc, char const *argv[]){
     string queryString = getenv("QUERY_STRING");
-	
+
+    // Chequeador de parametros
+    Checker* parameterCheckerPtr;	
+
     // Nombre
     string nombre = queryString.substr(0,queryString.find("&apellido1Input",0));
     nombre = nombre.substr(nombre.find("nombreInput=")+12);
+    parameterCheckerPtr->checkParameter(nombre);
+    
 
     // Apellido1
     string apellido1 = queryString.substr(0,queryString.find("&apellido2Input",0));
     apellido1 = apellido1.substr(apellido1.find("apellido1Input=")+15);
+    parameterCheckerPtr->checkParameter(apellido1);
 
     // Apellido2
     string apellido2 = queryString.substr(0,queryString.find("&usuarioInput",0));
     apellido2 = apellido2.substr(apellido2.find("apellido2Input=")+15);
+    parameterCheckerPtr->checkParameter(apellido2);
 
     // Usuario
     string usuario = queryString.substr(0, queryString.find("&correoInput",0));
     usuario = usuario.substr(usuario.find("usuarioInput=")+13);
+    parameterCheckerPtr->checkParameter(usuario);
 
     // Correo electronico
     string correo = queryString.substr(0,queryString.find("&telefonoInput",0));
     correo = correo.substr(correo.find("correoInput=")+12);
     correo[correo.find("%40")] = '@';
     correo = correo.erase(correo.find("@40")+1,2);
+    parameterCheckerPtr->checkParameter(correo);
 
     // Telefono
     string telefono = queryString.substr(0, queryString.find("&claveInput",0));
     telefono = telefono.substr(telefono.find("telefonoInput=")+14);
+    parameterCheckerPtr->checkParameter(telefono);
 
     // Clave
     string clave = queryString.substr(queryString.find("claveInput=")+11);
+    parameterCheckerPtr->checkParameter(clave);
 
     ConectorModular* conectorModularPtr;
     MYSQL* con;
@@ -49,14 +61,16 @@ int main(int argc, char const *argv[]){
 
     // Verificar si el usuario ya esta registrado con correo y clave
     string query = "SELECT count(*) FROM Usuario WHERE correo ='"+ correo + "' AND usuario = '" + usuario + "';";
+
     res = conectorModularPtr->query(con, query.c_str());
     row = mysql_fetch_row(res);
     char estaRegistrado = *row[0];
 
     if(estaRegistrado == '0'){
 	// clean up the database result
-    mysql_free_result(res);
+        mysql_free_result(res);
         query = "INSERT INTO Usuario(correo,nombre,appelido1,apellido2,telefono,usuario,clave) VALUES ('" + correo + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + telefono + "','" + usuario + "','" + clave + "');";
+
 	res = conectorModularPtr->query(con, query.c_str());
     }
     // clean up the database result
@@ -107,6 +121,7 @@ int main(int argc, char const *argv[]){
 	else{
 		cout << "El usuario fue registrado exitosamente." << "<br>";
 	}
+	cout << query << "<br>";
     }
     return 0;
 }
