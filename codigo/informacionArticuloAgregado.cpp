@@ -17,7 +17,7 @@ int main(int argc, char const *argv[]){
     // NombreArticulo
     string articulo = queryString.substr(0,queryString.find("&precioArticulo",0));
     articulo = articulo.substr(articulo.find("nombreArticulo=")+15);
-    parameterCheckerPtr->checkParameter(precio);
+    parameterCheckerPtr->checkParameter(articulo);
     
 
     // PrecioArticulo
@@ -81,7 +81,8 @@ int main(int argc, char const *argv[]){
         htmlFile.close();
 
 
-	cout << "El articulo fue agregado exitosamente." << "<br>";
+        cout << "El articulo fue agregado exitosamente." << "<br>";
+    }
 	
     return 0;
 }
