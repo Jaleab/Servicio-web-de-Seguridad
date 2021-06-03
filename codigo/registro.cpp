@@ -79,6 +79,7 @@ int main(int argc, char const *argv[]){
         }
         else {
                 cout << "Set-Cookie:estadoUsuario = Registrado;\r\n";
+		cout << "Set-Cookie:correo = " + correo  + ";\r\n";
         }
 	cout << "Content-Type: text/html\n\n";
         cout << "<TITLE>Registro</TITLE>\n";

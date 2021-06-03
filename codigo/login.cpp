@@ -41,6 +41,7 @@ int main(int argc, char* argv[], char** envp) {
         cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
     }
     else{
+	    cout << "Set-Cookie:correo = " + correo  + ";\r\n";
             cout << "Set-Cookie:estadoUsuario = Registrado;\r\n";
     }
 
