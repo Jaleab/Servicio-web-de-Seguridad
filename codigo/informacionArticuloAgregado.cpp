@@ -1,3 +1,4 @@
+// g++ `mysql_config --cflags --libs` informacionArticuloAgregado.cpp ConectorModular.cpp Checker.cpp -o ../cgi-bin/informacionArticuloAgregado.cgi -std=c++11
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -8,7 +9,6 @@
 #include "ConectorModular.h"
 using namespace std;
 int main(int argc, char const *argv[]){
-
     string queryString = getenv("QUERY_STRING");
 
     // Chequeador de parametros
@@ -26,7 +26,7 @@ int main(int argc, char const *argv[]){
     parameterCheckerPtr->checkParameter(precio);
 
     // DescripcionArticulo
-    string descripcion = descripcion.substr(descripcion.find("descripcionArticulo=")+20);
+    string descripcion = queryString.substr(queryString.find("descripcionArticulo=")+20);
     parameterCheckerPtr->checkParameter(descripcion);
 
     // PropietarioArticulo
@@ -34,21 +34,21 @@ int main(int argc, char const *argv[]){
     string propietario= "Yerlin";
     //string propietario = hilera.find("correo=");
 
-    // ConectorModular* conectorModularPtr;
-    // MYSQL* con;
-    // MYSQL_RES *res;	// the results
-    // MYSQL_ROW row;	// the results rows (array)
+    ConectorModular* conectorModularPtr;
+    MYSQL* con;
+    MYSQL_RES *res;	// the results
+    MYSQL_ROW row;	// the results rows (array)
 
-    // con = conectorModularPtr->connection();
+    con = conectorModularPtr->connection();
 
-    // string query = "INSERT INTO Articulo(nombre,precio,descripcion,propietario) VALUES ('" + articulo + "','" + precio + "','" + descripcion + "','" + propietario + "');";
+    string query = "INSERT INTO Articulo(nombre,precio,descripcion,propietario) VALUES ('" + articulo + "','" + precio + "','" + descripcion + "','" + propietario + "');";
 
-	// res = conectorModularPtr->query(con, query.c_str());
+   /* res = conectorModularPtr->query(con, query.c_str());
 
     // // clean up the database result
-    // mysql_free_result(res);    
-    // // close database connection
-    // mysql_close(con);
+    mysql_free_result(res);    */
+    // close database connection
+    mysql_close(con);
 
     ifstream htmlFile;
     string line = "";
@@ -60,8 +60,7 @@ int main(int argc, char const *argv[]){
         cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
     }
     else {
-	    cout << "Content-Type: text/html\n\n";
-        cout << "<TITLE>Registro</TITLE>\n";
+	cout << "Content-Type: text/html\n\n";
         while(getline(htmlFile, line)){
             if(line.find("Login") == string::npos){
                 cout << line << "\n";
@@ -80,7 +79,8 @@ int main(int argc, char const *argv[]){
         }
         htmlFile.close();
 
-        cout << queryString << "<br>"
+        cout << queryString << "<br>";
+	cout << query << "<br>";
         cout << "El articulo fue agregado exitosamente." << "<br>";
     }
 	
