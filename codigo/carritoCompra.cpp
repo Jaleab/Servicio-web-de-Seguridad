@@ -18,6 +18,21 @@ char* substr(char* arr, int begin, int len)
     return res;
 }
 
+vector<string> split(string data, string separator)
+{
+    vector<string> resul;
+    int end = data.find(separator);
+    int start = 0;
+    while (end != -1)
+    {
+        resul.push_back(data.substr(start, end - start));
+        start = end + separator.size();
+        end = data.find(separator, start);
+    }
+    resul.push_back(data.substr(start, end - start));
+
+    return resul;
+}
 
 int main(int argc, char* argv[], char** envp) {
     
@@ -41,39 +56,26 @@ int main(int argc, char* argv[], char** envp) {
             cout << line +"\n";
         }
         htmlFile.close();
-
+}
 
    cout << "<html>\n";
    cout << "<body>\n";
 
 
-            char *hilera = getenv("HTTP_COOKIE");
+        char *hilera = (char*)malloc(1000);
+        hilera = getenv("HTTP_COOKIE");
 
-            
-            string s;
-            stringstream ss;
-            ss << hilera;
-            s = ss.str();
-
-
-            size_t pos = s.find("articulo");     
-
-            string str3 = s.substr (pos+9);   
-              
-            size_t posfin = str3.find(";");    
-
-            string str4 = str3.substr (0,posfin); 
-
-
-            
-            
-            vector<string> result;
-            stringstream s_stream(str4); //create string stream from the string
-            while(s_stream.good()) {
-              string substr;
-              getline(s_stream, substr, ','); //get first string delimited by comma
-              result.push_back(substr);
-           }
+        vector<string> listaCookies = split(hilera, ";");
+        vector<string> articulosCookie;
+        vector<string> articulos;
+        for (int i = 0; i < listaCookies.size(); ++i)
+        {
+            if(listaCookies[i].find("articulo=") != -1){
+                
+                articulosCookie.push_back(split(listaCookies[i],"=")[1]);
+            }
+        }
+        articulos = split(articulosCookie[0],",");
 
 
             cout << "<div class=\"card card3\" style=\"width: 50rem; margin-top: 30px; margin-left:20%\">\n";
@@ -84,9 +86,9 @@ int main(int argc, char* argv[], char** envp) {
             cout << "<th>Articulos</th>";
             cout << "</thead>";
             cout << "<tbody>";
-            for(int i = 0; i<result.size(); i++) {    //print all splitted strings
+            for(int i = 0; i < articulos.size(); i++) {    //print all splitted strings
                                 cout << "<tr>";
-                cout << "<td>" << result.at(i) << "</td>";
+                cout << "<td>" << articulos[i] << "</td>";
                 cout << "</tr>";
             }
             cout << "</tbody>";
@@ -94,18 +96,6 @@ int main(int argc, char* argv[], char** envp) {
         
             cout << "</body>\n";
             cout << "</html>\n";
-
-            cout << "<div>\n";
-            cout << "<div class=\"row\">\n";
-            cout << "<div class=\"col\">\n";
-
-            cout << "<div class=\"form-group\" style=\"text-align:center;\">\n";
-            cout << "<label class=\"col-form-label\" for=\"TotalInput\">Total:</label>\n";
-            cout << "<input title=\"Total\" class=\"form-control\" placeholder=\"0\" id=\"TotalInput\" disabled></textarea>\n";
-            cout << "</div>\n";
-            cout << "</div>\n";
-            cout << "</div>\n";
-            cout << "</div>\n";
 
             cout << "<div style=\"text-align:center;\">\n";
             cout << "<button id=\"btn_Regresar\" type=\"button\" class=\"btn btn-primary\" style=\"width: 200px;\">Regresar</button>\n";
@@ -119,6 +109,7 @@ int main(int argc, char* argv[], char** envp) {
             //<!-- Modal content-->
             cout << "<div class=\"modal-content\">";
             cout << "<div class=\"modal-header\">";
+            cout << "Set-Cookie: articulo=comida,rice;";
             cout << "<button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>";
             cout << "<h4 class=\"modal-title\">Aviso de compra</h4>";
             cout << "</div>";
@@ -126,7 +117,7 @@ int main(int argc, char* argv[], char** envp) {
             cout << "<p>Compra realizada exitosamente.</p>";
             cout << "</div>";
             cout << "<div class=\"modal-footer\">";
-            cout << "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Cerrar</button>";
+            cout << "<button onclick=\"window.location.href='http://localhost/cgi-bin/carritoCompra.cgi';\" type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Cerrar</button>";
             cout << "</div>";
             cout << "</div>";
             cout << "</div>";
@@ -154,7 +145,6 @@ int main(int argc, char* argv[], char** envp) {
                 htmlFile.close();
                 
             }
-}
 
     return 0;
 }
