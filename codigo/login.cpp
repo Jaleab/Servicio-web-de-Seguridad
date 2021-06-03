@@ -29,16 +29,20 @@ int main(int argc, char* argv[], char** envp) {
     string query = "SELECT count(*) FROM Usuario WHERE correo ='"+ correo + "' AND clave = '" + clave + "';";
     res = conectorModularPtr->query(con, query.c_str());
     row = mysql_fetch_row(res);
-	char estaRegistrado = *row[0];
+    char estaRegistrado = *row[0];
+    // clean up the database result
+    mysql_free_result(res);
+    
+    // close database connection
+    mysql_close(con);
 
     // Cookies estado usuario
-    if(estaRegistrado == '1'){
-        cout << "Set-Cookie:estadoUsuario = Registrado;\r\n";
+    if(estaRegistrado == '0'){
+        cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
     }
     else{
-        if(estaRegistrado == '0'){
-            cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
-        }
+	    cout << "Set-Cookie:correo = " + correo  + ";\r\n";
+            cout << "Set-Cookie:estadoUsuario = Registrado;\r\n";
     }
 
 
@@ -60,7 +64,7 @@ int main(int argc, char* argv[], char** envp) {
             }
             else{
                 if(estaRegistrado == '1'){
-                    string botonCerrarSesion = "<a href=\"https://172.24.131.152/cgi-bin/cerrarSesion.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesión</a>";
+                    string botonCerrarSesion = "<a href=\"https://172.24.131.152/cgi-bin/loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesión</a>";
                     cout << botonCerrarSesion << "\n";
                 }
                 else{
@@ -70,26 +74,12 @@ int main(int argc, char* argv[], char** envp) {
             }
         }
         htmlFile.close();
-
-        // Correo electronico
-        string correo = queryString.substr(0,queryString.find("&claveInput",0));
-        correo = correo.substr(correo.find("correoInput=")+12);
-        correo[correo.find("%40")] = '@';
-        correo = correo.erase(correo.find("@40")+1,2);
-        cout << "Correo: " << correo << "<br>";
-
-        // Clave
-        string clave = queryString.substr(queryString.find("%3D=")+4);
-            cout << "Clave: " << clave << "<br>";
-
-        cout << query << "<br>";
-        if(row && estaRegistrado == '1'){
-            cout << "Usuario registrado" << "<br>";
-        }
-        else{
-            cout << "Usuario n oesta registrado" << "<br>";
-        }
-
+	if(estaRegistrado == '0'){
+		cout << "Ingreso credenciales incorrectos" << "<br>";
+	}
+	else{
+		cout << "Ingreso correctamente al sistema." << "<br>";
+	}
 
         // Insertar footer en el body
         htmlFile.open("../html/footerInsert.html");

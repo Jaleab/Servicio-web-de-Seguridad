@@ -17,6 +17,8 @@ int main(int argc, char* argv[]) {
         cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
     }
     else {
+	cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
+	cout << "Set-Cookie:correo = nulo;\r\n";
         cout << "Content-Type: text/html\n\n";
         while(getline(htmlFile, line)){
             cout << line +"\n";
