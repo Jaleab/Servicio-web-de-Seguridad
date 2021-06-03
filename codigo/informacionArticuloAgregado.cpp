@@ -34,21 +34,21 @@ int main(int argc, char const *argv[]){
     string propietario= "Yerlin";
     //string propietario = hilera.find("correo=");
 
-    ConectorModular* conectorModularPtr;
-    MYSQL* con;
-    MYSQL_RES *res;	// the results
-    MYSQL_ROW row;	// the results rows (array)
+    // ConectorModular* conectorModularPtr;
+    // MYSQL* con;
+    // MYSQL_RES *res;	// the results
+    // MYSQL_ROW row;	// the results rows (array)
 
-    con = conectorModularPtr->connection();
+    // con = conectorModularPtr->connection();
 
-    string query = "INSERT INTO Articulo(nombre,precio,descripcion,propietario) VALUES ('" + articulo + "','" + precio + "','" + descripcion + "','" + propietario + "');";
+    // string query = "INSERT INTO Articulo(nombre,precio,descripcion,propietario) VALUES ('" + articulo + "','" + precio + "','" + descripcion + "','" + propietario + "');";
 
-	res = conectorModularPtr->query(con, query.c_str());
+	// res = conectorModularPtr->query(con, query.c_str());
 
-    // clean up the database result
-    mysql_free_result(res);    
-    // close database connection
-    mysql_close(con);
+    // // clean up the database result
+    // mysql_free_result(res);    
+    // // close database connection
+    // mysql_close(con);
 
     ifstream htmlFile;
     string line = "";
@@ -80,7 +80,7 @@ int main(int argc, char const *argv[]){
         }
         htmlFile.close();
 
-
+        cout << queryString << "<br>"
         cout << "El articulo fue agregado exitosamente." << "<br>";
     }
 	
