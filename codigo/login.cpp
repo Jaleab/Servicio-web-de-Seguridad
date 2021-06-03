@@ -1,4 +1,4 @@
-// g++ `mysql_config --cflags --libs` login.cpp ConectorModular.cpp -o ../cgi-bin/login.cgi
+// g++ `mysql_config --cflags --libs` login.cpp ConectorModular.cpp Checker.cpp -o ../cgi-bin/login.cgi -std=c++11
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -6,19 +6,25 @@
 #include <string>
 #include <algorithm>
 #include "ConectorModular.h"
+#include "Checker.h"
 using namespace std;
 
 int main(int argc, char* argv[], char** envp) {
-	string queryString = getenv("QUERY_STRING");
+    string queryString = getenv("QUERY_STRING");
+
+    // Parameters checker
+    Checker* parameterCheckerPtr;
 	
-	// Correo electronico
+    // Correo electronico
     string correo = queryString.substr(0,queryString.find("&claveInput",0));
     correo = correo.substr(correo.find("correoInput=")+12);
     correo[correo.find("%40")] = '@';
     correo = correo.erase(correo.find("@40")+1,2);
+    parameterCheckerPtr->checkParameter(correo);
 
     // Clave
     string clave = queryString.substr(queryString.find("claveInput=")+11);
+    parameterCheckerPtr->checkParameter(clave);
 
     ConectorModular* conectorModularPtr;
     MYSQL* con;

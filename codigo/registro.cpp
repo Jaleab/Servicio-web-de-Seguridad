@@ -90,6 +90,7 @@ int main(int argc, char const *argv[]){
     else {
 	if(estaRegistrado != '0'){
                 cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
+		cout << "Set-Cookie:correo = nulo;\r\n";
         }
         else {
                 cout << "Set-Cookie:estadoUsuario = Registrado;\r\n";
@@ -121,7 +122,6 @@ int main(int argc, char const *argv[]){
 	else{
 		cout << "El usuario fue registrado exitosamente." << "<br>";
 	}
-	cout << query << "<br>";
     }
     return 0;
 }
