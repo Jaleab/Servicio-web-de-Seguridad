@@ -88,7 +88,7 @@ int main(int argc, char const *argv[]){
         }
         htmlFile.close();
          con = conectorModularPtr->connection();
-        if(hilera.find("estadoUsuario=Registrado") == string::npos){
+        if(usuario=="nulo"){
             string query = "INSERT INTO Formulario(nombre,correo,asunto,contenido) VALUES ('" + nombre + "','" + correo + "','" + asunto + "','" + contenido + "');";
             res = conectorModularPtr->query(con, query.c_str());
              //clean up the database result
