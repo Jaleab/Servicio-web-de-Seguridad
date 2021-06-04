@@ -10,6 +10,7 @@
 using namespace std;
 int main(int argc, char const *argv[]){
     string queryString = getenv("QUERY_STRING");
+    replace(queryString.begin(), queryString.end(),'+',' ');
 
     // Chequeador de parametros
     Checker* parameterCheckerPtr;	
