@@ -30,15 +30,6 @@ if(!criterioBusqueda.empty()){
     string query = "SELECT * FROM Articulo WHERE nombre LIKE '%"+ criterioBusqueda +"%';";
     res = conectorModularPtr->query(con, query.c_str());
 
-   
-
-
-/*     for_each(){
-
-    }
-    char estaRegistrado = *row[0]; */
-
-
 
 }
 else{
@@ -63,18 +54,6 @@ else{
         }
         htmlFile.close();
         
-        // Insertar contenido en el body
-/*         htmlFile.open("../html/resultadoBusqueda.html");
-        if(!htmlFile.is_open()) {
-            cout << "<TITLE>Failure</TITLE>\n";
-            cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
-        }
-        else {
-            line = "";
-            while(getline(htmlFile, line)){
-                cout << line +"\n";
-            }
-            htmlFile.close(); */
         int count = 0;
 
         if(res){
@@ -85,12 +64,14 @@ else{
                 cout << "<div class='card' style='width: 100rem; margin-top: 15px; margin-left:10%; padding: 10px;'>";
                 cout << "<div class='card-body'>";
                 cout << "<h5 class='card-title'>";
-                cout << row[4];
+                cout << row[1];
                 cout << "</h5>";
                 cout << "<p class='card-text'>";
-                cout << row[1];
+                cout << row[4];
                 cout << "</p>";
-                cout << "<a href='#' class='btn btn-primary float-right'>Detalle</a>";
+                cout << "<a href='http://172.24.131.136/cgi-bin/articulo.cgi?id="; // id = articulo Id
+                cout << row[0];
+                cout <<"' class='btn btn-primary float-right'>Detalle</a>";  
                 cout << "<p class='card-text'>";
                 cout << row[3];
                 cout << "</p>";
