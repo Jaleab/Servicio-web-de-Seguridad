@@ -34,6 +34,7 @@ int main(int argc, char const *argv[]){
     string contenido = queryString.substr(queryString.find("contenidoInput=")+15);
     parameterCheckerPtr->checkParameter(contenido);
 
+    string hilera = getenv("HTTP_COOKIE");
     ConectorModular* conectorModularPtr;
     MYSQL* con;
     MYSQL_RES *res;	// the results
