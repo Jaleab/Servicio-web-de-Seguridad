@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
     ifstream htmlFile;
-    string hilera = getenv("HTTP_COOKIE");
+    //string hilera = getenv("HTTP_COOKIE");
     string line = "";
     // Insertar header en el body
     htmlFile.open("../html/headerInsert.html");

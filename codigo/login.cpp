@@ -1,6 +1,7 @@
 // g++ `mysql_config --cflags --libs` login.cpp ConectorModular.cpp Checker.cpp -o ../cgi-bin/login.cgi -std=c++11
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -71,24 +72,24 @@ int main(int argc, char* argv[], char** envp) {
             }
             else{
                 if(line.find("</ul>") != string::npos){
-                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
+                    if(estaRegistrado != '0'){
                         cout << "<li class=\"nav-item\">";
-                    cout<< "<a class=\"nav-link\" href=\"formularioArticulo.cgi\">Agregar articulo</a></li></ul>";
+                        cout<< "<a class=\"nav-link\" href=\"formularioArticulo.cgi\">Agregar articulo</a></li></ul>";
                     } else{
                     cout << "</ul> \n";
                     }
                 }
                 if(line.find("Login") != string::npos){
-                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
+                    if(estaRegistrado != '0'){
                         string botonCerrarSesion = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesion</a>";
-                    cout << botonCerrarSesion << "\n";
+                        cout << botonCerrarSesion << "\n";
                     }else{
                         string botonLoginRegistro = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
                         cout << botonLoginRegistro << "\n";
                     }
                 }
                 if(line.find("fa-shopping-cart") != string::npos){
-                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
+                    if(estaRegistrado != '0'){
                         cout << "<a href='carritoCompra.cgi' class='btn btn-outline-success my-2 my-sm-0'> <i class='fa fa-shopping-cart fa-2x'></i> </a> \n";
                     }
                 }
