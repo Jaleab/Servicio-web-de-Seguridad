@@ -32,7 +32,9 @@ int main(int argc, char const *argv[]){
 
     // PropietarioArticulo
     string hilera = getenv("HTTP_COOKIE");
-    string propietario = hilera.substr(hilera.find("=")+1,hilera.find(";")-2);
+    string propietario = hilera.substr(0, hilera.find("; estado"));
+    propietario = propietario.substr(propietario.find("correo=")+7);
+    parameterCheckerPtr->checkParameter(propietario);
 
     ConectorModular* conectorModularPtr;
     MYSQL* con;
@@ -51,36 +53,41 @@ int main(int argc, char const *argv[]){
         cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
     }
     else {
-	
-	
-
 	cout << "Content-Type: text/html\n\n";
-        while(getline(htmlFile, line)){
-            if(line.find("Login") == string::npos && line.find("</ul>") == string::npos){
+    while(getline(htmlFile, line)){
+            if(line.find("Login") == string::npos && line.find("</ul>") == string::npos && line.find("fa-shopping-cart") == string::npos){
                 cout << line << "\n";
             }
             else{
-		if(line.find("</ul>") != string::npos && hilera.find("estadoUsuario=Registrado") != string::npos){
-		  cout << "<li class=\"nav-item\">";
-                  cout<< "<a class=\"nav-link\" href=\"formularioArticulo.cgi\">Agregar articulo</a></li></ul>";
-		}else{
-		        
-                	if(hilera.find("estadoUsuario=Registrado") == string::npos){
-                    	    string botonCerrarSesion = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
-                   	    cout << botonCerrarSesion << "\n";
-                	}
-                	else{
-                   	   string botonLoginRegistro = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesion</a>";
-                    	   cout << botonLoginRegistro << "\n";
-                        }
-		}
+                if(line.find("</ul>") != string::npos){
+                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
+                        cout << "<li class=\"nav-item\">";
+                    cout<< "<a class=\"nav-link\" href=\"formularioArticulo.cgi\">Agregar articulo</a></li></ul>";
+                    } else{
+                    cout << "</ul> \n";
+                    }
+                }
+                if(line.find("Login") != string::npos){
+                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
+                        string botonCerrarSesion = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesion</a>";
+                    cout << botonCerrarSesion << "\n";
+                    }else{
+                        string botonLoginRegistro = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
+                        cout << botonLoginRegistro << "\n";
+                    }
+                }
+                if(line.find("fa-shopping-cart") != string::npos){
+                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
+                        cout << "<a href='carritoCompra.html' class='btn btn-outline-success my-2 my-sm-0'> <i class='fa fa-shopping-cart fa-2x'></i> </a> \n";
+                    }
+                }
             }
         }
         htmlFile.close();
 	if(hilera.find("estadoUsuario=Registrado") == string::npos){
 		cout << "<p style='text-align: center;'> Inicie sesion para agregar articulos. </p>" << "<br>";
 	}else{
-		/*con = conectorModularPtr->connection();
+		con = conectorModularPtr->connection();
 
     		string query = "INSERT INTO Articulo(nombre,precio,descripcion,propietario) VALUES ('" + articulo + "','" + precio + "','" + descripcion + "','" + propietario + "');";
 
@@ -89,10 +96,8 @@ int main(int argc, char const *argv[]){
     		//clean up the database result
    	 	mysql_free_result(res);  
     		//close database connection
-    		mysql_close(con);*/
-		cout << propietario<<"\n";
-		cout <<hilera << "\n";
-		cout << "El articulo fue agregado exitosamente." << "<br>";
+    		mysql_close(con);
+		cout << "<p style='text-align: center;'>El articulo fue agregado exitosamente.</p>" << "<br>";
 	}
         
     }
