@@ -88,40 +88,54 @@ int main(int argc, char const *argv[]){
         cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
     }
     else {
-	if(estaRegistrado != '0'){
-                cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
-		cout << "Set-Cookie:correo = nulo;\r\n";
-        }
-        else {
-                cout << "Set-Cookie:estadoUsuario = Registrado;\r\n";
-		cout << "Set-Cookie:correo = " + correo  + ";\r\n";
-        }
-	cout << "Content-Type: text/html\n\n";
-        cout << "<TITLE>Registro</TITLE>\n";
-        while(getline(htmlFile, line)){
-            if(line.find("Login") == string::npos){
-                cout << line << "\n";
+        if(estaRegistrado != '0'){
+                    cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
+            cout << "Set-Cookie:correo = nulo;\r\n";
             }
-            else{
-		string hilera = getenv("HTTP_COOKIE");
-                if(estaRegistrado != '0'){
-                    string botonCerrarSesion = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
-                    cout << botonCerrarSesion << "\n";
+            else {
+                    cout << "Set-Cookie:estadoUsuario = Registrado;\r\n";
+            cout << "Set-Cookie:correo = " + correo  + ";\r\n";
+            }
+            cout << "Content-Type: text/html\n\n";
+            cout << "<TITLE>Registro</TITLE>\n";
+            while(getline(htmlFile, line)){
+                if(line.find("Login") == string::npos){
+                    cout << line << "\n";
                 }
                 else{
-                    string botonLoginRegistro = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesion</a>";
-                    cout << botonLoginRegistro << "\n";
+                    string hilera = getenv("HTTP_COOKIE");
+                    if(estaRegistrado != '0'){
+                        string botonCerrarSesion = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
+                        cout << botonCerrarSesion << "\n";
+                    }
+                    else{
+                        string botonLoginRegistro = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesion</a>";
+                        cout << botonLoginRegistro << "\n";
+                    }
                 }
             }
+            htmlFile.close();
+        if(estaRegistrado == '1'){
+            cout << "<p style='text-align: center;'>El usuario ya esta registrado.</p>" << "<br>";
         }
-        htmlFile.close();
-
-	if(estaRegistrado == '1'){
-		cout << "<p style='text-align: center;'>El usuario ya esta registrado.</p>" << "<br>";
-	}
-	else{
-		cout << "<p style='text-align: center;'> El usuario fue registrado exitosamente.</p>" << "<br>";
-	}
+        else{
+            cout << "<p style='text-align: center;'> El usuario fue registrado exitosamente.</p>" << "<br>";
+        }
+        
+        // Insertar footer en el body
+            htmlFile.open("../html/footerInsert.html");
+            if(!htmlFile.is_open()) {
+                cout << "<TITLE>Failure</TITLE>\n";
+                cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
+            }
+            else {
+                line = "";
+                while(getline(htmlFile, line)){
+                    cout << line +"\n";
+                }
+                htmlFile.close();
+            }
     }
     return 0;
 }
+
