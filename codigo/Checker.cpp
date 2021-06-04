@@ -17,7 +17,7 @@ using namespace std;
    }
    
    bool Checker::checkNumber(const string& number){
-	unordered_set<char> digits {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+	unordered_set<char> digits {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
 	for(char digit : number){
 	     if(digits.find(digit) == digits.end()){
 		   return false;
