@@ -1,0 +1,54 @@
+<html>
+<body> 
+ <div class="card card3" style="width: 50rem; margin-top: 30px; margin-left:20%">
+    <form action="informacionArticuloAgregado.cgi"  method="get">
+    <h2 style="text-align:center">Contáctanos</h2>
+            <div class="card-body">
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="col-form-label" for="nombreInput">Nombre</label>
+                                <input type="text" name = "nombreInput" title="Nombre" class="form-control" placeholder="Nombre" id="nombreInput" required value="" maxlength="25">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="col-form-label" for="correoInput">Correo electronico</label>
+                                <input type="email" title="Correo electronico" class="form-control" placeholder="Correo electronico" id="correoInput" name="correoInput" required value="" maxlength="30" title="Formato: nombre@dominio.com por ejemplo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                <dic>
+                    <select name="asunto" id="asunto">
+                        <option value="asunto">Consulta</option>
+                        <option value="retroalimentacion">Retroalimentacion</option>
+                        <option value="reclamo">Reclamo</option>
+                    </select>
+                </div>
+                <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="col-form-label" for="contenidoInput">Contenido</label>
+                                <textarea title="Contenido" name= "contenidoInput" class="form-control" placeholder="Contenido del formulario" id="descripcionInput" required value="" maxlength="300"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align:center;">
+                    <button type="submit" class="btn btn-primary" style="width: 200px;">Enviar</button>
+                </div>
+                </form>
+               
+            </div>   
+        </div>
+    </div>
+</body>
+</html>
+  
