@@ -1,3 +1,4 @@
+// g++ `mysql_config --cflags --libs` informacionFormularioContacto.cpp ConectorModular.cpp Checker.cpp -o ../cgi-bin/informacionFormularioContacto.cgi -std=c++11
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
