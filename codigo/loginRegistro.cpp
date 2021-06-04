@@ -27,9 +27,7 @@ int main(int argc, char* argv[]) {
             }
             else{
                 if(line.find("fa-shopping-cart") != string::npos){
-                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
-                        cout << "<a href='carritoCompra.html' class='btn btn-outline-success my-2 my-sm-0'> <i class='fa fa-shopping-cart fa-2x'></i> </a> \n";
-                    }
+			int a = 10;
                 }
             }
         }
@@ -65,3 +63,4 @@ int main(int argc, char* argv[]) {
     }
     return 0;
 }
+
