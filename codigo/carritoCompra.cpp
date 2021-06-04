@@ -49,7 +49,7 @@ int main(int argc, char* argv[], char** envp) {
     }
     else {
         cout << "Content-type:text/html\r\n";
-        cout << "Set-Cookie: articulo=taza,carro,pais,moto,tina,helio,colchones;\r\n";
+        //cout << "Set-Cookie: articulo=taza,carro,pais,moto,tina,helio,colchones;\r\n";
         cout << "Set-Cookie: user=tizio;\r\n";
         cout << "Set-Cookie: password=profdfosfiotjrejiod;\r\n\r\n";
         while(getline(htmlFile, line)){
