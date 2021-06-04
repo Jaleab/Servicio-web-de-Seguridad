@@ -70,21 +70,21 @@ int main(int argc, char* argv[], char** envp) {
             }
             else{
                 if(estaRegistrado == '1'){
-                    string botonCerrarSesion = "<a href=\"https://172.24.131.152/cgi-bin/loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesión</a>";
+                    string botonCerrarSesion = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesión</a>";
                     cout << botonCerrarSesion << "\n";
                 }
                 else{
-                    string botonLoginRegistro = "<a href=\"https://172.24.131.152/cgi-bin/loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
+                    string botonLoginRegistro = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
                     cout << botonLoginRegistro << "\n";
                 }
             }
         }
         htmlFile.close();
 	if(estaRegistrado == '0'){
-		cout << "Ingreso credenciales incorrectos" << "<br>";
+		cout << "<p style='text-align: center;'> Ingreso credenciales incorrectos </p>" << "<br>";
 	}
 	else{
-		cout << "Ingreso correctamente al sistema." << "<br>";
+		cout << "<p style='text-align: center;'> Ingreso correctamente al sistema. </p>" << "<br>";
 	}
 
         // Insertar footer en el body

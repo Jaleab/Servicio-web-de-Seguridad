@@ -7,6 +7,7 @@ using namespace std;
 class Checker {
    public:
       void checkParameter(string&);
+      bool checkNumber(const string&);
 };
 #endif
 
