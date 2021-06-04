@@ -125,7 +125,9 @@ int main(int argc, char* argv[], char** envp) {
 
             cout << "<div style=\"text-align:center;\">\n";
             cout << "<a href='resultadoBusqueda.cgi' id=\"btn_Regresar\" class=\"btn btn-primary\" style=\"width: 200px;\">Regresar</a>\n";
-            cout << "<a href='loginRegistro.cgi'  id=\"btn_FinalizarCompra\" class=\"btn btn-primary\" style=\"width: 200px;\">Finalizar compra</a>\n";
+	    if(articulosCookie[0] != "vacio"){
+                 cout << "<a href='finalizarCompra.cgi'  id=\"btn_FinalizarCompra\" class=\"btn btn-primary\" style=\"width: 200px;\">Finalizar compra</a>\n";
+	    }
             cout << "</div>\n";
 /*
             //<!-- Modal -->

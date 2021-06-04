@@ -82,7 +82,7 @@ int main(int argc, char const *argv[]){
                 }
                 if(line.find("fa-shopping-cart") != string::npos){
                     if(hilera.find("estadoUsuario=Registrado") != string::npos){
-                        cout << "<a href='carritoCompra.html' class='btn btn-outline-success my-2 my-sm-0'> <i class='fa fa-shopping-cart fa-2x'></i> </a> \n";
+                        cout << "<a href='carritoCompra.cgi' class='btn btn-outline-success my-2 my-sm-0'> <i class='fa fa-shopping-cart fa-2x'></i> </a> \n";
                     }
                 }
             }
@@ -96,7 +96,7 @@ int main(int argc, char const *argv[]){
         	mysql_free_result(res);  
              //close database connection
             mysql_close(con);
-            cout << "El formulario fue enviado exitosamente." << "<br>";
+            cout << "<p style='text-align: center;'>El formulario fue enviado exitosamente.</p>" << "<br>";
         }else{
             string query = "INSERT INTO Formulario(nombre,correo,asunto,contenido,autor) VALUES ('" + nombre + "','" + correo + "','" + asunto + "','" + contenido + "','"+ usuario + "');";
             res = conectorModularPtr->query(con, query.c_str());
@@ -105,7 +105,7 @@ int main(int argc, char const *argv[]){
             //close database connection
             mysql_close(con);
             
-            cout << "El formulario fue enviado exitosamente." << "<br>";
+            cout << "<p style='text-align: center;'> El formulario fue enviado exitosamente.</p>" << "<br>";
             // Insertar footer en el body
         }
             htmlFile.open("../html/footerInsert.html");
