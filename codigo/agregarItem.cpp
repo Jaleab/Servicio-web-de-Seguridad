@@ -58,13 +58,21 @@ int main(int argc, char* argv[], char** envp) {
         cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
     }
     else {
-        if(string::npos && parameterCheckerPtr->checkNumber(infoArticulo)){
+        //if(parameterCheckerPtr->checkNumber(infoArticulo)){
             ConectorModular* conectorModularPtr;
             MYSQL* con;
             MYSQL_RES *res; // the results
             MYSQL_ROW row;  // the results rows (array)
 
             con = conectorModularPtr->connection();
+	    query = "SELECT nombre FROM Articulo WHERE articuloId = " + infoArticulo;
+	    if(parameterCheckerPtr->checkNumber(infoArticulo)){
+		res = conectorModularPtr->query(con, query.c_str());
+                row = mysql_fetch_row(res);
+		nombre = row[0];
+ 		// clean up the database result
+                mysql_free_result(res);
+	    }/*
             query = "SELECT nombre FROM Articulo WHERE articuloId = " + infoArticulo;
             res = conectorModularPtr->query(con, query.c_str());
             row = mysql_fetch_row(res);
@@ -72,7 +80,7 @@ int main(int argc, char* argv[], char** envp) {
             //    string nombre = "Bicicleta";
 
             // clean up the database result
-            //mysql_free_result(res);
+            //mysql_free_result(res);*/
             
             // close database connection
             mysql_close(con);
@@ -88,7 +96,7 @@ int main(int argc, char* argv[], char** envp) {
             }
 
             cout << "Content-Type: text/html\n\n";
-            cout << "<TITLE>Login</TITLE>\n";
+            cout << "<TITLE>Agregar al carrito</TITLE>\n";
             while(getline(htmlFile, line)){
                 if(line.find("Login") == string::npos && line.find("</ul>") == string::npos && line.find("fa-shopping-cart") == string::npos){
                     cout << line << "\n";
@@ -118,7 +126,7 @@ int main(int argc, char* argv[], char** envp) {
                     }
                 }
             }
-        }  
+        /*}  
         else{
             cout << "Content-Type: text/html\n\n";
             cout << "<TITLE>Agregar item</TITLE>\n";
@@ -152,7 +160,7 @@ int main(int argc, char* argv[], char** envp) {
                     }
                 }
             }
-        }      
+        }  */    
         htmlFile.close();
 
 	// Insertar contenido en el body
