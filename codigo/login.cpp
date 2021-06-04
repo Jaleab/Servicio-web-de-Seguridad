@@ -81,10 +81,10 @@ int main(int argc, char* argv[], char** envp) {
         }
         htmlFile.close();
 	if(estaRegistrado == '0'){
-		cout << "Ingreso credenciales incorrectos" << "<br>";
+		cout << "<p style='text-align: center;'> Ingreso credenciales incorrectos </p>" << "<br>";
 	}
 	else{
-		cout << "Ingreso correctamente al sistema." << "<br>";
+		cout << "<p style='text-align: center;'> Ingreso correctamente al sistema. </p>" << "<br>";
 	}
 
         // Insertar footer en el body

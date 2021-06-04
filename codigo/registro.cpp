@@ -117,10 +117,10 @@ int main(int argc, char const *argv[]){
         htmlFile.close();
 
 	if(estaRegistrado == '1'){
-		cout << "El usuario ya esta registrado." << "<br>";
+		cout << "<p style='text-align: center;'>El usuario ya esta registrado.</p>" << "<br>";
 	}
 	else{
-		cout << "El usuario fue registrado exitosamente." << "<br>";
+		cout << "<p style='text-align: center;'> El usuario fue registrado exitosamente.</p>" << "<br>";
 	}
     }
     return 0;
