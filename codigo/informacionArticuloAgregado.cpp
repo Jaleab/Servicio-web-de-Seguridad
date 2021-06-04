@@ -30,8 +30,8 @@ int main(int argc, char const *argv[]){
     parameterCheckerPtr->checkParameter(descripcion);
 
     // PropietarioArticulo
-    string hilera = getenv("HTTP_COOKIE");
-    string propietario= "Yerlin";
+   // string hilera = getenv("HTTP_COOKIE");
+    string propietario= "yerlin@correo.com";
     //string propietario = hilera.find("correo=");
 
     ConectorModular* conectorModularPtr;
@@ -43,15 +43,16 @@ int main(int argc, char const *argv[]){
 
     string query = "INSERT INTO Articulo(nombre,precio,descripcion,propietario) VALUES ('" + articulo + "','" + precio + "','" + descripcion + "','" + propietario + "');";
 
-   /* res = conectorModularPtr->query(con, query.c_str());
+    res = conectorModularPtr->query(con, query.c_str());
 
-    // // clean up the database result
-    mysql_free_result(res);    */
-    // close database connection
+    //clean up the database result
+    mysql_free_result(res);  
+    //close database connection
     mysql_close(con);
 
     ifstream htmlFile;
     string line = "";
+    string hilera = getenv("HTTP_COOKIE");
     // Insertar header en el body
     htmlFile.open("../html/headerInsert.html");
     if(!htmlFile.is_open()){
@@ -67,7 +68,7 @@ int main(int argc, char const *argv[]){
             }
             else{
 		        
-                if(hilera.find("estado=registrado") != string::npos){
+                if(hilera.find("estado=Registrado") == string::npos){
                     string botonCerrarSesion = "<a href=\"https://172.24.131.152/cgi-bin/loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
                     cout << botonCerrarSesion << "\n";
                 }
@@ -80,7 +81,7 @@ int main(int argc, char const *argv[]){
         htmlFile.close();
 
         cout << queryString << "<br>";
-	cout << query << "<br>";
+        cout << query << "<br>";
         cout << "El articulo fue agregado exitosamente." << "<br>";
     }
 	
