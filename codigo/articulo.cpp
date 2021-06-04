@@ -102,8 +102,10 @@ int main(int argc, char* argv[], char** envp) {
         cout << "</div>";
         cout << "</div>";
         cout << "<div style='text-align:center;'>";
-        cout << "<a type='button' class='btn btn-primary' style='width: 200px;display:inline-block' href='resultadoBusqueda.cgi'>Regresar</a>";
-        cout << "<button type='button' class='btn btn-primary' style='width: 200px'>Agregar</button>";
+        cout << "<a class='btn btn-primary' style='width: 200px;display:inline-block' href='resultadoBusqueda.cgi'>Regresar</a>";
+        cout << "<a class='btn btn-primary' style='width: 200px;display:inline-block' href='agregarItem.cgi?id=";
+        cout << row[0];
+        cout << "'>Agregar</a>";
         cout << "</div>";
         cout << "</div>";
         cout << "</div>";
@@ -134,3 +136,4 @@ int main(int argc, char* argv[], char** envp) {
     }
     return 0;
 }
+

@@ -113,7 +113,7 @@ int main(int argc, char* argv[], char** envp) {
                     }
                     if(line.find("fa-shopping-cart") != string::npos){
                         if(hilera.find("estadoUsuario=Registrado") != string::npos){
-                            cout << "<a href='carritoCompra.html' class='btn btn-outline-success my-2 my-sm-0'> <i class='fa fa-shopping-cart fa-2x'></i> </a> \n";
+                            cout << "<a href='carritoCompra.cgi' class='btn btn-outline-success my-2 my-sm-0'> <i class='fa fa-shopping-cart fa-2x'></i> </a> \n";
                         }
                     }
                 }
@@ -124,12 +124,24 @@ int main(int argc, char* argv[], char** envp) {
         }      
         htmlFile.close();
 
-        cout << hilera << "<br>";
-        cout << queryString << "<br>";
-        cout << infoArticulo << "<br>";
-        cout << nuevoCarrito << "<br>";
-	cout << query << "<br>";
-	cout << nombre << "<br>";
+	// Insertar contenido en el body
+
+	/*cout << query << "<br>";
+	cout << nuevoCarrito;*/
+	cout << "<iframe src='carritoCompra.cgi' style='display: block; border:none; height:1100px; width:1100px;' title='carrito'></iframe>";
+
+        /*htmlFile.open("../html/carritoCompra.html");
+        if(!htmlFile.is_open()) {
+            cout << "<TITLE>Failure</TITLE>\n";
+            cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
+        }
+        else {
+            line = "";
+            while(getline(htmlFile, line)){
+                cout << line +"\n";
+	    }
+       }
+       htmlFile.close();*/
 
         // Insertar footer en el body
         htmlFile.open("../html/footerInsert.html");

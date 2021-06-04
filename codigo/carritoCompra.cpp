@@ -49,18 +49,17 @@ int main(int argc, char* argv[], char** envp) {
     }
     else {
         cout << "Content-type:text/html\r\n";
+	cout << "Set-Cookie: z=a\r\n";
         //cout << "Set-Cookie: articulo=taza,carro,pais,moto,tina,helio,colchones;\r\n";
         cout << "Set-Cookie: user=tizio;\r\n";
         cout << "Set-Cookie: password=profdfosfiotjrejiod;\r\n\r\n";
-        while(getline(htmlFile, line)){
+        while(getline(htmlFile, line) && line.find("body") == string::npos){
             cout << line +"\n";
         }
         htmlFile.close();
 }
-
    cout << "<html>\n";
    cout << "<body>\n";
-
 
         char *hilera = (char*)malloc(1000);
         hilera = getenv("HTTP_COOKIE");
@@ -109,7 +108,7 @@ int main(int argc, char* argv[], char** envp) {
             //<!-- Modal content-->
             cout << "<div class=\"modal-content\">";
             cout << "<div class=\"modal-header\">";
-            cout << "Set-Cookie: articulo=comida,rice;";
+            //cout << "Set-Cookie: articulo=comida,rice;";
             cout << "<button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>";
             cout << "<h4 class=\"modal-title\">Aviso de compra</h4>";
             cout << "</div>";
@@ -130,7 +129,7 @@ int main(int argc, char* argv[], char** envp) {
 
 
         
-
+/*
             // Insertar footer en el body
             htmlFile.open("../html/footerInsert.html");
             if(!htmlFile.is_open()) {
@@ -144,7 +143,7 @@ int main(int argc, char* argv[], char** envp) {
                 }
                 htmlFile.close();
                 
-            }
+            }*/
 
     return 0;
 }
