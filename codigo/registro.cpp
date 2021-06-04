@@ -122,7 +122,7 @@ int main(int argc, char const *argv[]){
                 }
                 if(line.find("fa-shopping-cart") != string::npos){
                     if(estaRegistrado == '0'){
-                        cout << "<a href='carritoCompra.html' class='btn btn-outline-success my-2 my-sm-0'> <i class='fa fa-shopping-cart fa-2x'></i> </a> \n";
+                        cout << "<a href='carritoCompra.cgi' class='btn btn-outline-success my-2 my-sm-0'> <i class='fa fa-shopping-cart fa-2x'></i> </a> \n";
                     }
                 }
             }

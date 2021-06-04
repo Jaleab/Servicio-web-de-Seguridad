@@ -128,7 +128,7 @@ int main(int argc, char* argv[], char** envp) {
 
 	/*cout << query << "<br>";
 	cout << nuevoCarrito;*/
-	cout << "<iframe src='carritoCompra.cgi' style='display: block; border:none; height:1100px; width:1100px;' title='carrito'></iframe>";
+	cout << "<iframe src='carritoCompraEmbed.cgi' style='display: block; border:none; height:1100px; width:1100px;' title='carrito'></iframe>";
 
         /*htmlFile.open("../html/carritoCompra.html");
         if(!htmlFile.is_open()) {

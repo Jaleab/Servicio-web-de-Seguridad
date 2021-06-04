@@ -53,7 +53,7 @@ int main(int argc, char* argv[], char** envp) {
         //cout << "Set-Cookie: articulo=taza,carro,pais,moto,tina,helio,colchones;\r\n";
         //cout << "Set-Cookie: user=tizio;\r\n";
         cout << "Set-Cookie: password=profdfosfiotjrejiod;\r\n\r\n";
-        while(getline(htmlFile, line)){
+        while(getline(htmlFile, line) && line.find("body") == string::npos){
             cout << line +"\n";
         }
         htmlFile.close();
@@ -97,10 +97,10 @@ int main(int argc, char* argv[], char** envp) {
             cout << "</html>\n";
 
             cout << "<div style=\"text-align:center;\">\n";
-            cout << "<a href='resultadoBusqueda.cgi' id=\"btn_Regresar\" class=\"btn btn-primary\" style=\"width: 200px;\">Regresar</a>\n";
+/*            cout << "<a href='resultadoBusqueda.cgi' id=\"btn_Regresar\" class=\"btn btn-primary\" style=\"width: 200px;\">Regresar</a>\n";
             cout << "<a href='loginRegistro.cgi'  id=\"btn_FinalizarCompra\" class=\"btn btn-primary\" style=\"width: 200px;\">Finalizar compra</a>\n";
             cout << "</div>\n";
-/*
+
             //<!-- Modal -->
             cout << "<div class=\"modal fade\" id=\"myModal\" role=\"dialog\">";
             cout << "<div class=\"modal-dialog\">";
@@ -129,7 +129,7 @@ int main(int argc, char* argv[], char** envp) {
 
 
         
-
+/*
             // Insertar footer en el body
             htmlFile.open("../html/footerInsert.html");
             if(!htmlFile.is_open()) {
@@ -143,7 +143,7 @@ int main(int argc, char* argv[], char** envp) {
                 }
                 htmlFile.close();
                 
-            }
+            }*/
 
     return 0;
 }
