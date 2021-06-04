@@ -13,6 +13,7 @@ int main(int argc, char* argv[], char** envp) {
 
     string queryString; 
     string infoArticulo;
+    string hilera = getenv("HTTP_COOKIE");
 
     // Parameters checker
     Checker* parameterCheckerPtr;
@@ -34,7 +35,33 @@ int main(int argc, char* argv[], char** envp) {
     else {
         cout << "Content-Type: text/html\n\n";
         while(getline(htmlFile, line)){
-            cout << line +"\n";
+            if(line.find("Login") == string::npos && line.find("</ul>") == string::npos && line.find("fa-shopping-cart") == string::npos){
+                cout << line << "\n";
+            }
+            else{
+                if(line.find("</ul>") != string::npos){
+                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
+                        cout << "<li class=\"nav-item\">";
+                    cout<< "<a class=\"nav-link\" href=\"formularioArticulo.cgi\">Agregar articulo</a></li></ul>";
+                    } else{
+                    cout << "</ul> \n";
+                    }
+                }
+                if(line.find("Login") != string::npos){
+                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
+                        string botonCerrarSesion = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesion</a>";
+                    cout << botonCerrarSesion << "\n";
+                    }else{
+                        string botonLoginRegistro = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
+                        cout << botonLoginRegistro << "\n";
+                    }
+                }
+                if(line.find("fa-shopping-cart") != string::npos){
+                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
+                        cout << "<a href='carritoCompra.cgi' class='btn btn-outline-success my-2 my-sm-0'> <i class='fa fa-shopping-cart fa-2x'></i> </a> \n";
+                    }
+                }
+            }
         }
         htmlFile.close();
 
@@ -136,4 +163,5 @@ int main(int argc, char* argv[], char** envp) {
     }
     return 0;
 }
+
 

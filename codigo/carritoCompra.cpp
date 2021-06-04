@@ -39,6 +39,7 @@ int main(int argc, char* argv[], char** envp) {
 
     ifstream htmlFile;
     string line = "";
+    string hilera = getenv("HTTP_COOKIE");
     // Insertar header en el body
     htmlFile.open("../html/headerInsert.html");
 
@@ -54,15 +55,41 @@ int main(int argc, char* argv[], char** envp) {
         //cout << "Set-Cookie: user=tizio;\r\n";
         cout << "Set-Cookie: password=profdfosfiotjrejiod;\r\n\r\n";
         while(getline(htmlFile, line)){
-            cout << line +"\n";
+            if(line.find("Login") == string::npos && line.find("</ul>") == string::npos && line.find("fa-shopping-cart") == string::npos){
+                cout << line << "\n";
+            }
+            else{
+                if(line.find("</ul>") != string::npos){
+                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
+                        cout << "<li class=\"nav-item\">";
+                    cout<< "<a class=\"nav-link\" href=\"formularioArticulo.cgi\">Agregar articulo</a></li></ul>";
+                    } else{
+                    cout << "</ul> \n";
+                    }
+                }
+                if(line.find("Login") != string::npos){
+                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
+                        string botonCerrarSesion = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesion</a>";
+                    cout << botonCerrarSesion << "\n";
+                    }else{
+                        string botonLoginRegistro = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
+                        cout << botonLoginRegistro << "\n";
+                    }
+                }
+                if(line.find("fa-shopping-cart") != string::npos){
+                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
+                        cout << "<a href='carritoCompra.cgi' class='btn btn-outline-success my-2 my-sm-0'> <i class='fa fa-shopping-cart fa-2x'></i> </a> \n";
+                    }
+                }
+            }
         }
         htmlFile.close();
 }
    cout << "<html>\n";
    cout << "<body>\n";
 
-        char *hilera = (char*)malloc(1000);
-        hilera = getenv("HTTP_COOKIE");
+        /*char *hilera = (char*)malloc(1000);
+        hilera = getenv("HTTP_COOKIE");*/
 
         vector<string> listaCookies = split(hilera, ";");
         vector<string> articulosCookie;
@@ -147,4 +174,5 @@ int main(int argc, char* argv[], char** envp) {
 
     return 0;
 }
+
 
