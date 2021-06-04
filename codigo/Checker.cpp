@@ -16,11 +16,11 @@ using namespace std;
       }
    }
    
-   bool Checker::checkPrice(const string& price){
+   bool Checker::checkNumber(const string& number){
 	unordered_set<char> digits {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
-	for(char digit : price){
+	for(char digit : number){
 	     if(digits.find(digit) == digits.end()){
-		return false;
+		   return false;
 	     }
 	}
   	return true;
