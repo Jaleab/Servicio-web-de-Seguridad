@@ -97,7 +97,7 @@ int main(int argc, char const *argv[]){
             mysql_close(con);
             cout << "El formulario fue enviado exitosamente." << "<br>";
         }else{
-            string query = "INSERT INTO Formulario(nombre,correo,asunto,contenido) VALUES ('" + nombre + "','" + correo + "','" + asunto + "','" + contenido + "','"+ usuario + "');";
+            string query = "INSERT INTO Formulario(nombre,correo,asunto,contenido,autor) VALUES ('" + nombre + "','" + correo + "','" + asunto + "','" + contenido + "','"+ usuario + "');";
             res = conectorModularPtr->query(con, query.c_str());
             //clean up the database result
             mysql_free_result(res);  
@@ -106,6 +106,7 @@ int main(int argc, char const *argv[]){
             
             cout << "El formulario fue enviado exitosamente." << "<br>";
             // Insertar footer en el body
+        }
             htmlFile.open("../html/footerInsert.html");
             if(!htmlFile.is_open()) {
                 cout << "<TITLE>Failure</TITLE>\n";
@@ -117,8 +118,7 @@ int main(int argc, char const *argv[]){
                     cout << line +"\n";
                 }
                 htmlFile.close();
-            }
-        }  
+            } 
 		
 	}
         	
