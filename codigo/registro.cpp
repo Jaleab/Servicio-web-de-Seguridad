@@ -105,11 +105,11 @@ int main(int argc, char const *argv[]){
             else{
 		string hilera = getenv("HTTP_COOKIE");
                 if(estaRegistrado != '0'){
-                    string botonCerrarSesion = "<a href=\"https://172.24.131.152/cgi-bin/loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
+                    string botonCerrarSesion = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
                     cout << botonCerrarSesion << "\n";
                 }
                 else{
-                    string botonLoginRegistro = "<a href=\"https://172.24.131.152/cgi-bin/loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesion</a>";
+                    string botonLoginRegistro = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesion</a>";
                     cout << botonLoginRegistro << "\n";
                 }
             }
