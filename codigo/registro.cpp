@@ -11,6 +11,7 @@ using namespace std;
 
 int main(int argc, char const *argv[]){
     string queryString = getenv("QUERY_STRING");
+    string hilera = getenv("HTTP_COOKIE");
 
     // Chequeador de parametros
     Checker* parameterCheckerPtr;	
@@ -67,11 +68,10 @@ int main(int argc, char const *argv[]){
     char estaRegistrado = *row[0];
 
     if(estaRegistrado == '0'){
-	// clean up the database result
-        mysql_free_result(res);
-        query = "INSERT INTO Usuario(correo,nombre,appelido1,apellido2,telefono,usuario,clave) VALUES ('" + correo + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + telefono + "','" + usuario + "','" + clave + "');";
-
-	res = conectorModularPtr->query(con, query.c_str());
+	    // clean up the database result
+            mysql_free_result(res);
+            query = "INSERT INTO Usuario(correo,nombre,appelido1,apellido2,telefono,usuario,clave) VALUES ('" + correo + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + telefono + "','" + usuario + "','" + clave + "');";
+	    res = conectorModularPtr->query(con, query.c_str());
     }
     // clean up the database result
     mysql_free_result(res);    
@@ -89,53 +89,67 @@ int main(int argc, char const *argv[]){
     }
     else {
         if(estaRegistrado != '0'){
-                    cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
+            cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
             cout << "Set-Cookie:correo = nulo;\r\n";
-            }
-            else {
-                    cout << "Set-Cookie:estadoUsuario = Registrado;\r\n";
+        }
+        else{
+            cout << "Set-Cookie:estadoUsuario = Registrado;\r\n";
             cout << "Set-Cookie:correo = " + correo  + ";\r\n";
+        }
+        cout << "Content-Type: text/html\n\n";
+        cout << "<TITLE>Registro</TITLE>\n";
+        while(getline(htmlFile, line)){
+            if(line.find("Login") == string::npos && line.find("</ul>") == string::npos && line.find("fa-shopping-cart") == string::npos){
+                cout << line << "\n";
             }
-            cout << "Content-Type: text/html\n\n";
-            cout << "<TITLE>Registro</TITLE>\n";
-            while(getline(htmlFile, line)){
-                if(line.find("Login") == string::npos){
-                    cout << line << "\n";
-                }
-                else{
-                    string hilera = getenv("HTTP_COOKIE");
-                    if(estaRegistrado != '0'){
-                        string botonCerrarSesion = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
-                        cout << botonCerrarSesion << "\n";
+            else{
+                if(line.find("</ul>") != string::npos){
+                    if(estaRegistrado == '0'){
+                        cout << "<li class=\"nav-item\">";
+                        cout<< "<a class=\"nav-link\" href=\"formularioArticulo.cgi\">Agregar articulo</a></li></ul>";
+                    } else{
+                        cout << "</ul> \n";
                     }
-                    else{
-                        string botonLoginRegistro = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesion</a>";
+                }
+                if(line.find("Login") != string::npos){
+                    if(estaRegistrado == '0'){
+                        string botonCerrarSesion = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesion</a>";
+                        cout << botonCerrarSesion << "\n";
+                    }else{
+                        string botonLoginRegistro = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
                         cout << botonLoginRegistro << "\n";
                     }
                 }
+                if(line.find("fa-shopping-cart") != string::npos){
+                    if(estaRegistrado == '0'){
+                        cout << "<a href='carritoCompra.html' class='btn btn-outline-success my-2 my-sm-0'> <i class='fa fa-shopping-cart fa-2x'></i> </a> \n";
+                    }
+                }
             }
-            htmlFile.close();
-        if(estaRegistrado == '1'){
-            cout << "<p style='text-align: center;'>El usuario ya esta registrado.</p>" << "<br>";
+        }
+        htmlFile.close();
+        if(estaRegistrado == '0'){
+	    cout << "<p style='text-align: center;'> El usuario fue registrado exitosamente.</p>" << "<br>";
         }
         else{
-            cout << "<p style='text-align: center;'> El usuario fue registrado exitosamente.</p>" << "<br>";
+	    cout << "<p style='text-align: center;'>El usuario ya esta registrado.</p>" << "<br>";
         }
         
         // Insertar footer en el body
-            htmlFile.open("../html/footerInsert.html");
-            if(!htmlFile.is_open()) {
-                cout << "<TITLE>Failure</TITLE>\n";
-                cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
+        htmlFile.open("../html/footerInsert.html");
+        if(!htmlFile.is_open()) {
+            cout << "<TITLE>Failure</TITLE>\n";
+            cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
+        }
+        else {
+            line = "";
+            while(getline(htmlFile, line)){
+                cout << line +"\n";
             }
-            else {
-                line = "";
-                while(getline(htmlFile, line)){
-                    cout << line +"\n";
-                }
-                htmlFile.close();
-            }
+            htmlFile.close();
+        }
     }
     return 0;
 }
+
 
