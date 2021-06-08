@@ -7,8 +7,8 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
     ifstream htmlFile;
-    string line = "";
     string hilera = getenv("HTTP_COOKIE");
+    string line = "";
     // Insertar header en el body
     htmlFile.open("../html/headerInsert.html");
     if(!htmlFile.is_open()) {
@@ -17,13 +17,14 @@ int main(int argc, char* argv[]) {
         cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
     }
     else {
+	cout << "Set-Cookie:articulo = vacio;\r\n";
         cout << "Content-Type: text/html\n\n";
         while(getline(htmlFile, line)){
             if(line.find("Login") == string::npos && line.find("</ul>") == string::npos && line.find("fa-shopping-cart") == string::npos){
                 cout << line << "\n";
             }
             else{
-                if(line.find("</ul>") != string::npos){
+		if(line.find("</ul>") != string::npos){
                     if(hilera.find("estadoUsuario=Registrado") != string::npos){
                         cout << "<li class=\"nav-item\">";
                     cout<< "<a class=\"nav-link\" href=\"formularioArticulo.cgi\">Agregar articulo</a></li></ul>";
@@ -49,33 +50,22 @@ int main(int argc, char* argv[]) {
         }
         htmlFile.close();
         
-        // Insertar contenido en el body
-        htmlFile.open("../html/formularioArticulo.html");
-        if(!htmlFile.is_open()) {
+	cout << "<p style='text-align:center;'>Su compra fue realizada correctamente</p><br>";
+            
+
+       // Insertar footer en el body
+       htmlFile.open("../html/footerInsert.html");
+       if(!htmlFile.is_open()) {
             cout << "<TITLE>Failure</TITLE>\n";
             cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
-        }
-        else {
+       }
+       else {
             line = "";
             while(getline(htmlFile, line)){
                 cout << line +"\n";
             }
             htmlFile.close();
-
-            // Insertar footer en el body
-            htmlFile.open("../html/footerInsert.html");
-            if(!htmlFile.is_open()) {
-                cout << "<TITLE>Failure</TITLE>\n";
-                cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
-            }
-            else {
-                line = "";
-                while(getline(htmlFile, line)){
-                    cout << line +"\n";
-                }
-                htmlFile.close();
-            }
-        }
+       }        
     }
     return 0;
 }

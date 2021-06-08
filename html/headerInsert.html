@@ -41,22 +41,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">Página principal</a>
+              <a class="nav-link" href="resultadoBusqueda.cgi">Página principal</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contactenos</a>
+              <a class="nav-link" href="formularioContacto.cgi">Contactenos</a>
             </li>
           </ul>
-         <!--  <form class="form-search">
-            <div class="input-group">
-              <input class="form-control form-text" maxlength="128" placeholder="Buscar" size="15" type="text" />
-              <span class="input-group-btn"><button class="btn btn-primary"><i class="fa fa-search fa-lg">&nbsp;</i></button></span>
-            </div>
-          </form> -->
 
           <form name="busqueda" action="resultadoBusqueda.cgi" method="GET">
             <div class="input-group md-form form-sm form-2 pl-0">
-              <input class="form-control my-0 py-1 yellow-border" type="text" placeholder="Buscar por el nombre del autor..." aria-label="Search" id="searchInput" name="searchInput" maxlength="25">
+              <input class="form-control my-0 py-1 yellow-border" type="text" placeholder="Buscar por el nombre..." aria-label="Search" id="searchInput" name="searchInput" maxlength="25">
               <div class="input-group-append">
                 <span class="input-group-text amber lighten-1" onclick="busqueda.submit()" id="searchButton"><i class="fa fa-search text-grey"
                     aria-hidden="true"></i></span>
@@ -75,3 +69,4 @@
       </nav>
    </header>
 </html>
+

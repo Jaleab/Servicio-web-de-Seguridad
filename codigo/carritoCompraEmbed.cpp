@@ -39,7 +39,6 @@ int main(int argc, char* argv[], char** envp) {
 
     ifstream htmlFile;
     string line = "";
-    string hilera = getenv("HTTP_COOKIE");
     // Insertar header en el body
     htmlFile.open("../html/headerInsert.html");
 
@@ -54,42 +53,16 @@ int main(int argc, char* argv[], char** envp) {
         //cout << "Set-Cookie: articulo=taza,carro,pais,moto,tina,helio,colchones;\r\n";
         //cout << "Set-Cookie: user=tizio;\r\n";
         cout << "Set-Cookie: password=profdfosfiotjrejiod;\r\n\r\n";
-        while(getline(htmlFile, line)){
-            if(line.find("Login") == string::npos && line.find("</ul>") == string::npos && line.find("fa-shopping-cart") == string::npos){
-                cout << line << "\n";
-            }
-            else{
-                if(line.find("</ul>") != string::npos){
-                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
-                        cout << "<li class=\"nav-item\">";
-                    cout<< "<a class=\"nav-link\" href=\"formularioArticulo.cgi\">Agregar articulo</a></li></ul>";
-                    } else{
-                    cout << "</ul> \n";
-                    }
-                }
-                if(line.find("Login") != string::npos){
-                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
-                        string botonCerrarSesion = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesion</a>";
-                    cout << botonCerrarSesion << "\n";
-                    }else{
-                        string botonLoginRegistro = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
-                        cout << botonLoginRegistro << "\n";
-                    }
-                }
-                if(line.find("fa-shopping-cart") != string::npos){
-                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
-                        cout << "<a href='carritoCompra.cgi' class='btn btn-outline-success my-2 my-sm-0'> <i class='fa fa-shopping-cart fa-2x'></i> </a> \n";
-                    }
-                }
-            }
+        while(getline(htmlFile, line) && line.find("body") == string::npos){
+            cout << line +"\n";
         }
         htmlFile.close();
 }
    cout << "<html>\n";
    cout << "<body>\n";
 
-        /*char *hilera = (char*)malloc(1000);
-        hilera = getenv("HTTP_COOKIE");*/
+        char *hilera = (char*)malloc(1000);
+        hilera = getenv("HTTP_COOKIE");
 
         vector<string> listaCookies = split(hilera, ";");
         vector<string> articulosCookie;
@@ -124,12 +97,10 @@ int main(int argc, char* argv[], char** envp) {
             cout << "</html>\n";
 
             cout << "<div style=\"text-align:center;\">\n";
-            cout << "<a href='resultadoBusqueda.cgi' id=\"btn_Regresar\" class=\"btn btn-primary\" style=\"width: 200px;\">Regresar</a>\n";
-	    if(articulosCookie[0] != "vacio"){
-                 cout << "<a href='finalizarCompra.cgi'  id=\"btn_FinalizarCompra\" class=\"btn btn-primary\" style=\"width: 200px;\">Finalizar compra</a>\n";
-	    }
+/*            cout << "<a href='resultadoBusqueda.cgi' id=\"btn_Regresar\" class=\"btn btn-primary\" style=\"width: 200px;\">Regresar</a>\n";
+            cout << "<a href='loginRegistro.cgi'  id=\"btn_FinalizarCompra\" class=\"btn btn-primary\" style=\"width: 200px;\">Finalizar compra</a>\n";
             cout << "</div>\n";
-/*
+
             //<!-- Modal -->
             cout << "<div class=\"modal fade\" id=\"myModal\" role=\"dialog\">";
             cout << "<div class=\"modal-dialog\">";
@@ -158,7 +129,7 @@ int main(int argc, char* argv[], char** envp) {
 
 
         
-
+/*
             // Insertar footer en el body
             htmlFile.open("../html/footerInsert.html");
             if(!htmlFile.is_open()) {
@@ -172,9 +143,8 @@ int main(int argc, char* argv[], char** envp) {
                 }
                 htmlFile.close();
                 
-            }
+            }*/
 
     return 0;
 }
-
 

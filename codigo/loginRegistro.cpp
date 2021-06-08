@@ -3,11 +3,11 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "ConectorModular.h"
 using namespace std;
 
 int main(int argc, char* argv[]) {
     ifstream htmlFile;
+    //string hilera = getenv("HTTP_COOKIE");
     string line = "";
     // Insertar header en el body
     htmlFile.open("../html/headerInsert.html");
@@ -19,9 +19,17 @@ int main(int argc, char* argv[]) {
     else {
 	cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
 	cout << "Set-Cookie:correo = nulo;\r\n";
+	cout << "Set-Cookie:articulo = vacio;\r\n";
         cout << "Content-Type: text/html\n\n";
         while(getline(htmlFile, line)){
-            cout << line +"\n";
+            if(line.find("fa-shopping-cart") == string::npos){
+                cout << line << "\n";
+            }
+            else{
+                if(line.find("fa-shopping-cart") != string::npos){
+			int a = 10;
+                }
+            }
         }
         htmlFile.close();
         
@@ -55,3 +63,4 @@ int main(int argc, char* argv[]) {
     }
     return 0;
 }
+

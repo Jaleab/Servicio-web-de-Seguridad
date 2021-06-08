@@ -1,6 +1,7 @@
 #include "Checker.h"
 #include <string>
 #include <algorithm>
+#include <unordered_set>
 using namespace std;
 
    void Checker::checkParameter(string& parameter){
@@ -13,5 +14,15 @@ using namespace std;
 		}
          }
       }
+   }
+   
+   bool Checker::checkNumber(const string& number){
+	unordered_set<char> digits {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
+	for(char digit : number){
+	     if(digits.find(digit) == digits.end()){
+		   return false;
+	     }
+	}
+  	return true;
    }
 

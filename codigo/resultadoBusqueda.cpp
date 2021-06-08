@@ -1,4 +1,4 @@
-// g++ `mysql_config --cflags --libs` resultadoBusqueda.cpp ConectorModular.cpp -o ../cgi-bin/resultadoBusqueda.cgi
+// g++ `mysql_config --cflags --libs` resultadoBusqueda.cpp ConectorModular.cpp Checker.cpp -o ../cgi-bin/resultadoBusqueda.cgi -std=c++11
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -6,12 +6,17 @@
 #include <string>
 #include <algorithm>
 #include "ConectorModular.h"
+#include "Checker.h"
 using namespace std;
 
 int main(int argc, char* argv[], char** envp) {
 
     string queryString = getenv("QUERY_STRING");
     string criterioBusqueda;
+    string hilera = getenv("HTTP_COOKIE");
+
+    // Parameters checker
+    Checker* parameterCheckerPtr;
 
     if(queryString.length()>12){
         criterioBusqueda = queryString.substr(queryString.find("searchInput=")+12);
@@ -26,7 +31,8 @@ int main(int argc, char* argv[], char** envp) {
 
 
 if(!criterioBusqueda.empty()){
- con = conectorModularPtr->connection();
+    parameterCheckerPtr->checkParameter(criterioBusqueda);
+    con = conectorModularPtr->connection();
     string query = "SELECT * FROM Articulo WHERE nombre LIKE '%"+ criterioBusqueda +"%';";
     res = conectorModularPtr->query(con, query.c_str());
 
@@ -50,7 +56,33 @@ else{
     else {
         cout << "Content-Type: text/html\n\n";
         while(getline(htmlFile, line)){
-            cout << line +"\n";
+            if(line.find("Login") == string::npos && line.find("</ul>") == string::npos && line.find("fa-shopping-cart") == string::npos){
+                cout << line << "\n";
+            }
+            else{
+                if(line.find("</ul>") != string::npos){
+                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
+                        cout << "<li class=\"nav-item\">";
+                    cout<< "<a class=\"nav-link\" href=\"formularioArticulo.cgi\">Agregar articulo</a></li></ul>";
+                    } else{
+                    cout << "</ul> \n";
+                    }
+                }
+                if(line.find("Login") != string::npos){
+                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
+                        string botonCerrarSesion = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Cerrar sesion</a>";
+                    cout << botonCerrarSesion << "\n";
+                    }else{
+                        string botonLoginRegistro = "<a href=\"loginRegistro.cgi\" class=\"btn btn-outline-success my-2 my-sm-0\">Login/Registro</a>";
+                        cout << botonLoginRegistro << "\n";
+                    }
+                }
+                if(line.find("fa-shopping-cart") != string::npos){
+                    if(hilera.find("estadoUsuario=Registrado") != string::npos){
+                        cout << "<a href='carritoCompra.cgi' class='btn btn-outline-success my-2 my-sm-0'> <i class='fa fa-shopping-cart fa-2x'></i> </a> \n";
+                    }
+                }
+            }
         }
         htmlFile.close();
         
@@ -69,7 +101,7 @@ else{
                 cout << "<p class='card-text'>";
                 cout << row[4];
                 cout << "</p>";
-                cout << "<a href='http://172.24.131.136/cgi-bin/articulo.cgi?id="; // id = articulo Id
+                cout << "<a href='articulo.cgi?id="; //id = articulo Id
                 cout << row[0];
                 cout <<"' class='btn btn-primary float-right'>Detalle</a>";  
                 cout << "<p class='card-text'>";
@@ -88,7 +120,7 @@ else{
 
         } 
         if(count==0) {
-            cout << "Criterio de búsqueda no ha devuelto resultado";
+            cout << "<p style= 'text-align: center'>Criterio de búsqueda no ha devuelto resultado</p>";
         }
 
 
@@ -109,3 +141,4 @@ else{
     }
     return 0;
 }
+
