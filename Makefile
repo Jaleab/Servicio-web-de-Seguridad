@@ -1,17 +1,17 @@
 #Compila todos los arcivos 
 app: codigo/agregarItem.cpp codigo/articulo.cpp codigo/carritoCompra.cpp codigo/carritoCompraEmbed.cpp codigo/Checker.cpp codigo/ConectorModular.cpp codigo/finalizarCompra.cpp codigo/formularioArticulo.cpp codigo/formularioContacto.cpp codigo/framework.cpp codigo/informacionArticuloAgregado.cpp codigo/informacionFormularioContacto.cpp codigo/login.cpp codigo/registro.cpp codigo/resultadoBusqueda.cpp codigo/usuarioVerificado.cpp
-	g++ `mysql_config --cflags --libs` codigo/agregarItem.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o ../cgi-bin/agregarItem.cgi -std=c++11
-	g++ `mysql_config --cflags --libs` codigo/articulo.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o ../cgi-bin/articulo.cgi -std=c++11
+	g++ `mysql_config --cflags --libs` codigo/agregarItem.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o cgi-bin/agregarItem.cgi -std=c++11
+	g++ `mysql_config --cflags --libs` codigo/articulo.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o cgi-bin/articulo.cgi -std=c++11
 	g++ codigo/carritoCompra.cpp -o cgi-bin/carritoCompra.cgi
 	g++ codigo/carritoCompraEmbed.cpp -o cgi-bin/carritoCompraEmbed.cgi
 	g++ codigo/finalizarCompra.cpp -o cgi-bin/finalizarCompra.cgi
 	g++ codigo/formularioArticulo.cpp -o cgi-bin/formularioArticulo.cgi
 	g++ codigo/formularioContacto.cpp -o cgi-bin/formularioContacto.cgi
-	g++ `mysql_config --cflags --libs` codigo/informacionArticuloAgregado.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o ../cgi-bin/informacionArticuloAgregado.cgi -std=c++11
-	g++ `mysql_config --cflags --libs` codigo/informacionFormularioContacto.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o ../cgi-bin/informacionFormularioContacto.cgi -std=c++11
-	g++ `mysql_config --cflags --libs` codigo/login.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o ../cgi-bin/login.cgi -std=c++11
-	g++ `mysql_config --cflags --libs` codigo/registro.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o ../cgi-bin/registro.cgi -std=c++11
-	g++ `mysql_config --cflags --libs` codigo/resultadoBusqueda.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o ../cgi-bin/resultadoBusqueda.cgi -std=c++11
+	g++ `mysql_config --cflags --libs` codigo/informacionArticuloAgregado.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o cgi-bin/informacionArticuloAgregado.cgi -std=c++11
+	g++ `mysql_config --cflags --libs` codigo/informacionFormularioContacto.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o cgi-bin/informacionFormularioContacto.cgi -std=c++11
+	g++ `mysql_config --cflags --libs` codigo/login.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o cgi-bin/login.cgi -std=c++11
+	g++ `mysql_config --cflags --libs` codigo/registro.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o cgi-bin/registro.cgi -std=c++11
+	g++ `mysql_config --cflags --libs` codigo/resultadoBusqueda.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o cgi-bin/resultadoBusqueda.cgi -std=c++11
 	g++ codigo/usuarioVerificado.cpp -o cgi-bin/usuarioVerificado.cgi
 
 #Limpia carpeta cgi-bin
