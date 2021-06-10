@@ -10,6 +10,8 @@ using namespace std;
 
     MYSQL* mysql_connection_setup(struct connection_details mysql_details){
         MYSQL *connection = mysql_init(NULL); // mysql instance
+	mysql_options(connection, MYSQL_SET_CHARSET_NAME, "utf8"); 
+	mysql_options(connection, MYSQL_INIT_COMMAND, "SET NAMES utf8");
     
             //connect database
             if(!mysql_real_connect(connection, mysql_details.server, mysql_details.user, mysql_details.password, mysql_details.database, 0, NULL, 0)){

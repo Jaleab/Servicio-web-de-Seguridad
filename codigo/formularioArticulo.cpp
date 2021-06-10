@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
         cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
     }
     else {
-        cout << "Content-Type: text/html\n\n";
+        cout << "Content-Type: text/html; charset=utf-8\n\n";
         while(getline(htmlFile, line)){
             if(line.find("Login") == string::npos && line.find("</ul>") == string::npos && line.find("fa-shopping-cart") == string::npos){
                 cout << line << "\n";
