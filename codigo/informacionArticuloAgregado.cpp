@@ -8,8 +8,32 @@
 #include "Checker.h"
 #include "ConectorModular.h"
 using namespace std;
+
+string urlDecode(string str){
+    string ret;
+    char ch;
+    int i, ii, len = str.length();
+
+    for (i=0; i < len; i++){
+        if(str[i] != '%'){
+            if(str[i] == '+')
+                ret += ' ';
+            else
+                ret += str[i];
+        }else{
+            sscanf(str.substr(i + 1, 2).c_str(), "%x", &ii);
+            ch = static_cast<char>(ii);
+            ret += ch;
+            i = i + 2;
+        }
+    }
+    return ret;
+}
+
 int main(int argc, char const *argv[]){
-    string queryString = getenv("QUERY_STRING");
+    string queryString = u8"";
+    queryString = getenv("QUERY_STRING");
+    queryString = urlDecode(queryString);
     replace(queryString.begin(), queryString.end(),'+',' ');
 
     // Chequeador de parametros
@@ -27,7 +51,8 @@ int main(int argc, char const *argv[]){
     parameterCheckerPtr->checkParameter(precio);
 
     // DescripcionArticulo
-    string descripcion = queryString.substr(queryString.find("descripcionArticulo=")+20);
+    string descripcion = u8"";
+    descripcion = queryString.substr(queryString.find("descripcionArticulo=")+20);
     parameterCheckerPtr->checkParameter(descripcion);
 
     // PropietarioArticulo
@@ -53,7 +78,7 @@ int main(int argc, char const *argv[]){
         cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
     }
     else {
-        cout << "Content-Type: text/html\n\n";
+        cout << "Content-Type: text/html; charset=utf-8\n\n";
         while(getline(htmlFile, line)){
             if(line.find("Login") == string::npos && line.find("</ul>") == string::npos && line.find("fa-shopping-cart") == string::npos){
                 cout << line << "\n";
@@ -113,4 +138,3 @@ int main(int argc, char const *argv[]){
     }	
     return 0;
 }
-
