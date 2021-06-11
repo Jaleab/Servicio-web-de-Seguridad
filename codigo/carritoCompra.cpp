@@ -119,8 +119,10 @@ int main(int argc, char* argv[], char** envp) {
             }
             cout << "</tbody>";
             cout << "</table>\n";
-        
-           cout << " <hr> <p>Total <span class='price' style='color:black'><b>$30</b></span></p>\n";
+
+	   string total = hilera.substr(hilera.find("total=")+6);
+	   total = total.substr(0,total.find(";"));
+           cout << " <hr> <p>Total <span class='price' style='color:black'><b>"+ total + "</b></span> colones</p>\n";
 
             cout << "</body>\n";
             cout << "</html>\n";
@@ -128,7 +130,7 @@ int main(int argc, char* argv[], char** envp) {
             cout << "<div style=\"text-align:center;\">\n";
             cout << "<a href='resultadoBusqueda.cgi' id=\"btn_Regresar\" class=\"btn btn-primary\" style=\"width: 200px;\">Regresar</a>\n";
 	    if(articulosCookie[0] != "vacio"){
-                 cout << "<a href='finalizarCompra.cgi'  id=\"btn_FinalizarCompra\" class=\"btn btn-primary\" style=\"width: 200px;\">Finalizar compra</a>\n";
+                 cout << "<a href='checkout.cgi'  id=\"btn_FinalizarCompra\" class=\"btn btn-primary\" style=\"width: 200px;\">Realizar compra</a>\n";
 	    }
             cout << "</div>\n";
 /*

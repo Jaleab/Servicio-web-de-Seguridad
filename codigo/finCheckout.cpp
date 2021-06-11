@@ -146,6 +146,8 @@ int main(int argc, char const *argv[]){
         cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
     }
     else {
+	cout << "Set-Cookie:total = 0;\r\n";
+        cout << "Set-Cookie:articulo = vacio;\r\n";
         cout << "Content-Type: text/html; charset=utf-8\n\n";
         while(getline(htmlFile, line)){
             if(line.find("Login") == string::npos && line.find("</ul>") == string::npos && line.find("fa-shopping-cart") == string::npos){
@@ -193,10 +195,13 @@ int main(int argc, char const *argv[]){
             mysql_free_result(res);  
             //close database connection
             mysql_close(con);
-	    cout << "<p style:'align-text: center'>Los datos de la tarjeta ingresada fueron validados correctamente. La compra fue finalizada correctamente.</p>" << "<br>";
+	    cout << "<p style='text-align: center;'>Los datos de la tarjeta ingresada fueron validados correctamente. La compra fue finalizada correctamente.</p>" << "<br>";
 	    }
-	    cout << direccion << " " << provincia << " " << nombreTarjeta << " " << numeroTarjeta << " " << mesExp << " " << anoExp << " " << cvv << "<br>";
-	    cout << tempNumero << "<br>";
+	    else{
+		cout << "<p style='text-align: center;'> Los datos de la tarjeta no son validos. En la siguiente direccion puede encontrar secuencias de numeros con formato valido de tarjetas VISA,Mastercard y Discover. https://www.freeformatter.com/credit-card-number-generator-validator.html . </p>" <<"<br>";
+	    }
+	    //cout << direccion << " " << provincia << " " << nombreTarjeta << " " << numeroTarjeta << " " << mesExp << " " << anoExp << " " << cvv << "<br>";
+	    //cout << tempNumero << "<br>";
 
             // Insertar footer en el body
             htmlFile.open("../html/footerInsert.html");

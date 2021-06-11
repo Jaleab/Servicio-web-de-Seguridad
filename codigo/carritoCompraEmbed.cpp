@@ -61,8 +61,7 @@ int main(int argc, char* argv[], char** envp) {
    cout << "<html>\n";
    cout << "<body>\n";
 
-        char *hilera = (char*)malloc(1000);
-        hilera = getenv("HTTP_COOKIE");
+        string hilera = getenv("HTTP_COOKIE");
 
         vector<string> listaCookies = split(hilera, ";");
         vector<string> articulosCookie;

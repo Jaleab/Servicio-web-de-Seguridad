@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
     else {
 	cout << "Set-Cookie:estadoUsuario = NoRegistrado;\r\n";
 	cout << "Set-Cookie:correo = nulo;\r\n";
+	cout << "Set-Cookie:total = 0;\r\n";
 	cout << "Set-Cookie:articulo = vacio;\r\n";
         cout << "Content-Type: text/html\n\n";
         while(getline(htmlFile, line)){

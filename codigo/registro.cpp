@@ -16,7 +16,7 @@ int main(int argc, char const *argv[]){
     // Chequeador de parametros
     Checker* parameterCheckerPtr;
     queryString = parameterCheckerPtr->urlDecode(queryString);
-    replace(queryString.begin(), queryString.end(),'+',' ');	
+    //replace(queryString.begin(), queryString.end(),'+',' ');	
 
     // Nombre
     string nombre = queryString.substr(0,queryString.find("&apellido1Input",0));
@@ -41,7 +41,7 @@ int main(int argc, char const *argv[]){
 
     // Correo electronico
     string correo = queryString.substr(0,queryString.find("&telefonoInput",0));
-    correo = correo.substr(correo.find("correoInput=")+12);
+    correo = correo.substr(correo.find("correoInput=")+10);
     correo[correo.find("%40")] = '@';
     correo = correo.erase(correo.find("@40")+1,2);
     parameterCheckerPtr->checkParameter(correo);

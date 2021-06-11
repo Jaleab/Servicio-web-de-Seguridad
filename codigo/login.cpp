@@ -16,10 +16,11 @@ int main(int argc, char* argv[], char** envp) {
 
     // Parameters checker
     Checker* parameterCheckerPtr;
+    queryString = parameterCheckerPtr->urlDecode(queryString);
 	
     // Correo electronico
     string correo = queryString.substr(0,queryString.find("&claveInput",0));
-    correo = correo.substr(correo.find("correoInput=")+12);
+    correo = correo.substr(correo.find("correoInput=")+10);
     correo[correo.find("%40")] = '@';
     correo = correo.erase(correo.find("@40")+1,2);
     parameterCheckerPtr->checkParameter(correo);
@@ -102,7 +103,6 @@ int main(int argc, char* argv[], char** envp) {
 	else{
 		cout << "<p style='text-align: center;'> Ingreso correctamente al sistema. </p>" << "<br>";
 	}
-
         // Insertar footer en el body
         htmlFile.open("../html/footerInsert.html");
         if(!htmlFile.is_open()) {

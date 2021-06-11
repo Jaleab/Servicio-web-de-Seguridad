@@ -167,10 +167,11 @@ int main(int argc, char* argv[], char** envp) {
 
 	// Insertar contenido en el body
 
-	cout << hilera << "<br>";
-	cout << query << "<br>";
-	cout << nuevoCarrito;
+	//cout << hilera << "<br>";
+	//cout << query << "<br>";
+	//cout << nuevoCarrito;
 	cout << "<iframe src='carritoCompraEmbed.cgi' style='display: block; border:none; height:1100px; width:1100px;' title='carrito'></iframe>";
+	//cout << costo;
 
         /*htmlFile.open("../html/carritoCompra.html");
         if(!htmlFile.is_open()) {
