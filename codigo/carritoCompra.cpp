@@ -120,6 +120,8 @@ int main(int argc, char* argv[], char** envp) {
             cout << "</tbody>";
             cout << "</table>\n";
         
+           cout << " <hr> <p>Total <span class='price' style='color:black'><b>$30</b></span></p>\n";
+
             cout << "</body>\n";
             cout << "</html>\n";
 

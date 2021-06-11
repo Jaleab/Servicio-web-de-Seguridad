@@ -15,7 +15,9 @@ app: codigo/agregarItem.cpp codigo/articulo.cpp codigo/carritoCompra.cpp codigo/
 	g++ `mysql_config --cflags --libs` codigo/resultadoBusqueda.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o cgi-bin/resultadoBusqueda.cgi -std=c++11
 	g++ `mysql_config --cflags --libs` codigo/agregarItem.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o cgi-bin/agregarItem.cgi -std=c++11
 	g++ codigo/usuarioVerificado.cpp -o cgi-bin/usuarioVerificado.cgi
+	g++ codigo/checkout.cpp -o cgi-bin/checkout.cgi
+	g++ `mysql_config --cflags --libs` codigo/finCheckout.cpp codigo/ConectorModular.cpp codigo/Checker.cpp -o cgi-bin/finCheckout.cgi -std=c++11
 
 #Limpia carpeta cgi-bin
 clean:
-	rm cgi-bin/agregarItem.cgi cgi-bin/articulo.cgi cgi-bin/carritoCompra.cgi cgi-bin/carritoCompraEmbed.cgi cgi-bin/finalizarCompra.cgi cgi-bin/formularioArticulo.cgi cgi-bin/formularioContacto.cgi cgi-bin/informacionArticuloAgregado.cgi cgi-bin/informacionFormularioContacto.cgi cgi-bin/login.cgi cgi-bin/loginRegistro.cgi cgi-bin/registro.cgi cgi-bin/resultadoBusqueda.cgi cgi-bin/usuarioVerificado.cgi
+	rm cgi-bin/finCheckout.cgi cgi-bin/agregarItem.cgi cgi-bin/articulo.cgi cgi-bin/carritoCompra.cgi cgi-bin/carritoCompraEmbed.cgi cgi-bin/finalizarCompra.cgi cgi-bin/formularioArticulo.cgi cgi-bin/formularioContacto.cgi cgi-bin/informacionArticuloAgregado.cgi cgi-bin/informacionFormularioContacto.cgi cgi-bin/login.cgi cgi-bin/loginRegistro.cgi cgi-bin/registro.cgi cgi-bin/resultadoBusqueda.cgi cgi-bin/usuarioVerificado.cgi

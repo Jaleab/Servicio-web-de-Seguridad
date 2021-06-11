@@ -72,30 +72,32 @@ int main(int argc, char* argv[], char** envp) {
 		nombre = row[0];
  		// clean up the database result
                 mysql_free_result(res);
-	    }/*
-            query = "SELECT nombre FROM Articulo WHERE articuloId = " + infoArticulo;
+	    }
+            query = "SELECT precio FROM Articulo WHERE articuloId = " + infoArticulo;
             res = conectorModularPtr->query(con, query.c_str());
             row = mysql_fetch_row(res);
-            nombre = row[0];
-            //    string nombre = "Bicicleta";
+            string costo = row[0];
 
             // clean up the database result
-            //mysql_free_result(res);*/
+            mysql_free_result(res);
             
             // close database connection
             mysql_close(con);
 
             // Append producto en cookie
             if(hilera.find("articulo=vacio") != string::npos){
+		cout << "Set-Cookie: total="+ costo + "\r\n";
                 cout << "Set-Cookie: articulo="+ nombre +"\r\n";
             }
             else{
                 nuevoCarrito = hilera.substr(hilera.find("articulo=")+9,hilera.find(";")-1);
                 nuevoCarrito += "," + nombre;
+		int nuevoCosto = stoi(hilera.substr(hilera.find("total=")+6,hilera.find(";")-1));
+                nuevoCosto += stoi(costo);
+		cout << "Set-Cookie: total="+ to_string(nuevoCosto) + "\r\n";
                 cout << "Set-Cookie: articulo="+nuevoCarrito+"\r\n";
             }
-
-            cout << "Content-Type: text/html\n\n";
+	    cout << "Content-Type: text/html; charset=utf-8\n\n";
             cout << "<TITLE>Agregar al carrito</TITLE>\n";
             while(getline(htmlFile, line)){
                 if(line.find("Login") == string::npos && line.find("</ul>") == string::npos && line.find("fa-shopping-cart") == string::npos){
@@ -165,8 +167,9 @@ int main(int argc, char* argv[], char** envp) {
 
 	// Insertar contenido en el body
 
-	/*cout << query << "<br>";
-	cout << nuevoCarrito;*/
+	cout << hilera << "<br>";
+	cout << query << "<br>";
+	cout << nuevoCarrito;
 	cout << "<iframe src='carritoCompraEmbed.cgi' style='display: block; border:none; height:1100px; width:1100px;' title='carrito'></iframe>";
 
         /*htmlFile.open("../html/carritoCompra.html");

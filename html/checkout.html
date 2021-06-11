@@ -3,15 +3,15 @@
  <div class="row">
   <div class="col-75">
     <div class="container">
-      <form action="/action_page.php">
+      <form action="finCheckout.cgi">
 
         <div class="row">
           <div class="col-50">
             <h3>Direccion de Envio</h3>
             <label for="dir"><i class="fa fa-address-card-o"></i> Direccion exacta</label>
-            <input type="text" id="dir" name="direccion" placeholder="100 metros antes del arbol." required value="" maxlength="100">
+            <input type="text" id="dir" name="direccion" placeholder="100 metros antes del arbol." required value="" maxlength="100" pattern="^[a-zA-Záéíóú0-9., ]{1,100}$" >
             <label for="provincia"><i class="fa fa-institution"></i>Provincia</label>
-            <input type="text" id="provincia" name="provincia" placeholder="San Jose" maxlength="20">
+            <input type="text" id="provincia" name="provincia" placeholder="San Jose" maxlength="25" pattern="^[a-zA-Záéíóú ]{1,25}$">
           </div>
 
           <div class="col-50">
@@ -24,20 +24,20 @@
               <i class="fa fa-cc-discover" style="color:orange;"></i>
             </div>
             <label for="cnombre">Nombre en tarjeta</label>
-            <input type="text" id="cnombre" name="nombreTarjeta" placeholder="John More Doe" required value="">
+            <input type="text" id="cnombre" name="nombreTarjeta" placeholder="John More Doe" required value="" ^[a-zA-Z]{1,20}$ pattern="^[a-zA-Záéíóú ]{1,100}$" maxlength="100">
             <label for="ccnum">Numero de la tarjeta</label>
-            <input type="text" id="ccnum" name="numeroTarjeta" placeholder="1111-2222-3333-4444" required value="" pattern="^([0-9]{4}( |\-)){3}[0-4]{4}$">
+            <input type="text" id="ccnum" name="numeroTarjeta" placeholder="1111-2222-3333-4444" required value="" pattern="^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$" title="El formato debe ser el siguiente 1234-4321-3213-5617. 16 Digitos separados con -." maxlength="19">
             <label for="expmonth">Mes expiracion</label>
-            <input type="text" id="expmonth" name="mesExp" placeholder="Enero" required value="">
+            <input type="text" id="expmonth" name="mesExp" placeholder="Enero" required value="" maxlength="30">
 
             <div class="row">
               <div class="col-50">
                 <label for="expyear">Año expiracion</label>
-                <input type="text" id="expyear" name="anoExp" placeholder="2022" min="2021" required value="">
+                <input type="text" id="expyear" name="anoExp" placeholder="2022" min="2021" required value="" pattern="^[0-9]{4}$" title="Formato deben ser 4 digitos por ejemplo 2022." maxlength="4">
               </div>
               <div class="col-50">
                 <label for="cvv">CVV</label>
-                <input type="text" id="cvv" name="cvv" placeholder="352" required value="">
+                <input type="text" id="cvv" name="cvv" placeholder="352" required value="" pattern="^[0-9]{3}$" title="El CVV de tres digitos en la parte trasera de la tarjeta." maxlength="3">
               </div>
             </div>
           </div>
