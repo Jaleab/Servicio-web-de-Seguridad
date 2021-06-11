@@ -14,6 +14,8 @@ int main(int argc, char const *argv[]){
 
     // Chequeador de parametros
     Checker* parameterCheckerPtr;	
+    queryString = parameterCheckerPtr->urlDecode(queryString);
+    replace(queryString.begin(), queryString.end(),'+',' ');
 
     // Nombre
     string nombre = queryString.substr(0,queryString.find("&correoInput",0));
@@ -57,7 +59,7 @@ int main(int argc, char const *argv[]){
         cout << "<P><EM>Unable to open data file, sorry!</EM>\n";
     }
     else {
-	    cout << "Content-Type: text/html\n\n";
+	    cout << "Content-Type: text/html; charset=utf-8\n\n";
         while(getline(htmlFile, line)){
             if(line.find("Login") == string::npos && line.find("</ul>") == string::npos && line.find("fa-shopping-cart") == string::npos){
                 cout << line << "\n";
