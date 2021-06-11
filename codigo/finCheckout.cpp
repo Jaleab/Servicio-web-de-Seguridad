@@ -9,14 +9,35 @@
 #include "ConectorModular.h"
 using namespace std;
 
+string urlDecode(string str){
+    string ret;
+    char ch;
+    int i, ii, len = str.length();
+
+    for (i=0; i < len; i++){
+        if(str[i] != '%'){
+            if(str[i] == '+')
+                ret += ' ';
+            else
+                ret += str[i];
+        }else{
+            sscanf(str.substr(i + 1, 2).c_str(), "%x", &ii);
+            ch = static_cast<char>(ii);
+            ret += ch;
+            i = i + 2;
+        }
+    }
+    return ret;
+}
+
 int main(int argc, char const *argv[]){
     string queryString = u8"";
     queryString = getenv("QUERY_STRING");
+    queryString = urlDecode(queryString);
+    replace(queryString.begin(), queryString.end(),'+',' ');
 
     // Chequeador de parametros
     Checker* parameterCheckerPtr;	
-    queryString = parameterCheckerPtr->urlDecode(queryString);
-    replace(queryString.begin(), queryString.end(),'+',' ');
 
     // NombreArticulo
     string articulo = queryString.substr(0,queryString.find("&precioArticulo",0));
@@ -91,13 +112,13 @@ int main(int argc, char const *argv[]){
         if(hilera.find("estadoUsuario=Registrado") == string::npos){
             cout << "<p style='text-align: center;'> Inicie sesion para agregar articulos. </p>" << "<br>";
         }else{
-            con = conectorModularPtr->connection();
+            /*con = conectorModularPtr->connection();
             string query = "INSERT INTO Articulo(nombre,precio,descripcion,propietario) VALUES ('" + articulo + "','" + precio + "','" + descripcion + "','" + propietario + "');";
             res = conectorModularPtr->query(con, query.c_str());
             //clean up the database result
             mysql_free_result(res);  
             //close database connection
-            mysql_close(con);
+            mysql_close(con);*/
             cout << "<p style='text-align: center;'>El articulo fue agregado exitosamente.</p>" << "<br>";
 
             // Insertar footer en el body

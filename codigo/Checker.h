@@ -8,6 +8,7 @@ class Checker {
    public:
       void checkParameter(string&);
       bool checkNumber(const string&);
+      string urlDecode(string);
 };
 #endif
 
