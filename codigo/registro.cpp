@@ -14,7 +14,9 @@ int main(int argc, char const *argv[]){
     string hilera = getenv("HTTP_COOKIE");
 
     // Chequeador de parametros
-    Checker* parameterCheckerPtr;	
+    Checker* parameterCheckerPtr;
+    queryString = parameterCheckerPtr->urlDecode(queryString);
+    replace(queryString.begin(), queryString.end(),'+',' ');	
 
     // Nombre
     string nombre = queryString.substr(0,queryString.find("&apellido1Input",0));
@@ -96,7 +98,7 @@ int main(int argc, char const *argv[]){
             cout << "Set-Cookie:estadoUsuario = Registrado;\r\n";
             cout << "Set-Cookie:correo = " + correo  + ";\r\n";
         }
-        cout << "Content-Type: text/html\n\n";
+        cout << "Content-Type: text/html; charset=utf-8\n\n";
         cout << "<TITLE>Registro</TITLE>\n";
         while(getline(htmlFile, line)){
             if(line.find("Login") == string::npos && line.find("</ul>") == string::npos && line.find("fa-shopping-cart") == string::npos){
